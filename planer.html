@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="storage.js"></script>
+    <script src="student.js"></script>
+    <script src="room.js"></script>
+    <script src="dragDrop.js"></script>
+    <link rel="stylesheet" href="print.css" media="print">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="desktop.css" >
+    <title>Sitzplaner</title>
+</head>
+<body>
+    <div id="template-container">
+        <template id="templ-student-list-item">
+            <li draggable="true" ondragstart="dragStartListItem(event)" data-dragitem="student-li">
+                <div class="student-name">
+                    
+                </div>
+                <div class="student-actions hide-drag">
+                    <button class="student-edit">Edit</button>
+                    <button class="student-delete">X</button>
+                </div>
+            </li>
+        </template>
+        <template id="templ-room-table">
+            <td class="table" ondragover="dragOverRoom(event)" ondragenter="dragOverRoom(event)" ondrop="dropOnTable(event)" data-dragitem="student-table">
+                <div draggable="true" class="student-table" ondragstart="dragStartTable(event)">
+                    <span class="student-name"></span>
+                </div>
+            </td>
+        </template>
+    </div> 
+    <main id="content">
+        <section id="sidebar">
+            <h2>Sch&uuml;ler</h2>
+            <div id="student-list-actions">
+                <button id="student-list-import">Import</button>
+                <button id="student-list-import">Export</button>
+                <button id="student-list-clear">L&ouml;sche Alle</button>
+            </div>
+            <ul id="student-list" ondragover="dragOverList(event)" ondragenter="dragOverList(event)" ondrop="dropOnList(event)">
+                <li>
+                    <form id="student-list-add-form">
+                        <input type="text" name="student-add-input" id="student-add-input" placeholder="Schülername" required />
+                        <button>Hinzuf&uuml;gen</button>
+                    </form>
+                </li>
+            </ul>
+        </section>
+        <section id="tables">
+            <datalist id="slider-list">
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+                <option value="6"></option>
+                <option value="7"></option>
+                <option value="8"></option>
+                <option value="9"></option>
+                <option value="10"></option>
+                <option value="11"></option>
+                <option value="12"></option>
+            </datalist>
+            <div id="sliders">
+                <div id="horizontal-slider-container">
+                    <input type="range" list="slider-list" min="1" max="12" step="1" value="9" id="horizontal-slider" title="Spalten" />
+                    <span class="slider-counter"></span>
+                </div>
+                <div id="vertical-slider-container">
+                    <input type="range" list="slider-list" min="1" max="12" step="1" value="7" id="vertical-slider" title="Reihen" />
+                    <span class="slider-counter"></span>
+                </div>
+            </div>
+            <div id="room">
+                <table id="room-table"></table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

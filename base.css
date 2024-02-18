@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
+#template-container {
+    display: none;
+}
+
+html, body, main {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}

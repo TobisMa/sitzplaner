@@ -1,0 +1,82 @@
+
+#sidebar {
+    position: fixed;
+    width: clamp(150px, 20%, 300px);
+    height: 100%;
+    border-right: 1px solid black;
+    padding: 5px;
+    left: 0;
+    top: 0;
+}
+
+#sidebar h2 {
+    text-align: center;
+}
+
+#tables {
+    position: absolute;
+    left: clamp(150px, 20%, 300px);
+    width: fit-content;
+    width: -moz-available;
+    height: 100%;
+}
+
+#room {
+    width: 100%;
+    height: calc(100% - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: safe;
+    overflow: auto;
+}
+
+#sliders {
+    height: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#sliders > div {
+    width: 50%;
+}
+
+#sliders input[type=range] {
+    width: 80%;
+}
+
+#room-table {
+    height: fit-content;
+    height: -moz-available;
+    margin: auto;
+
+}
+
+#room-table tr {
+    height: 100%;
+}
+
+#room-table .table {
+    min-height: 3em;
+    min-width: 20ch;
+    outline: 1px solid black;
+    border-collapse: collapse;
+}
+
+#room-table .table .student-table {
+    min-height: 5em;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+
+#room-table .table.is-table .student-table {
+    background-color: skyblue;
+}
+
+#room-table .table .student-table .student-name {
+    width: 100%;
+    text-align: center;
+}
