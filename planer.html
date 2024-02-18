@@ -19,10 +19,8 @@
                 <div class="student-name">
                     
                 </div>
-                <div class="student-actions hide-drag">
-                    <button class="student-edit">Edit</button>
-                    <button class="student-delete">X</button>
-                </div>
+                <button class="student-actions student-edit">Edit</button>
+                <button class="student-actions student-delete">X</button>
             </li>
         </template>
         <template id="templ-room-table">
@@ -44,8 +42,8 @@
             <ul id="student-list" ondragover="dragOverList(event)" ondragenter="dragOverList(event)" ondrop="dropOnList(event)">
                 <li>
                     <form id="student-list-add-form">
-                        <input type="text" name="student-add-input" id="student-add-input" placeholder="Schülername" required />
-                        <button>Hinzuf&uuml;gen</button>
+                        <input type="text" name="student-add-input" id="student-add-input" placeholder="Schülername" required autocomplete="name" />
+                        <button id="add-student-button">+</button>
                     </form>
                 </li>
             </ul>

@@ -17,9 +17,25 @@ function addStudentHTML(name) {
         let studentNode = template_studentListItem.content.cloneNode(true);
 
 
-        studentNode.querySelector(".student-name").innerText = name;
-        studentNode.querySelector(".student-actions .student-delete").onclick = (e) => {
+        let nameNode = studentNode.querySelector(".student-name");
+        nameNode.innerText = name;
+        studentNode.querySelector(".student-actions.student-delete").onclick = (e) => {
             removeStudent(name);
+        }
+        studentNode.querySelector(".student-actions.student-edit").onclick = (e) => {
+            let newName = prompt("Neuer Name:", name);
+            if (!newName) {
+                console.debug("Rename canceled by user");
+                return;
+            }
+            if (globalStudents.indexOf(newName) !== -1) {
+                alert("Name already present");
+                return;
+            }
+            let index = globalStudents.indexOf(name);
+            globalStudents[index] = newName;
+            nameNode.innerText = newName;
+            saveToStorage(KEY_STUDENT, globalStudents);
         }
 
         studentListNode.insertBefore(studentNode, studentListNode.lastElementChild);
@@ -50,7 +66,8 @@ function removeStudent(name) {
 
 function singleStudentAddForm(e) {
     e.preventDefault();
-    let name = e.target.querySelector("input#student-add-input")?.value;
+    let input = e.target.querySelector("input#student-add-input");
+    let name = input?.value;
     if (!name) {
         return;
     }

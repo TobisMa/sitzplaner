@@ -11,3 +11,8 @@ html, body, main {
     margin: 0;
     height: 100%;
 }
+
+section {
+    padding: 0;
+    margin: 0;
+}

@@ -4,13 +4,13 @@
     width: clamp(150px, 20%, 300px);
     height: 100%;
     border-right: 1px solid black;
-    padding: 5px;
     left: 0;
     top: 0;
 }
 
 #sidebar h2 {
     text-align: center;
+    text-indent: -2ch;
 }
 
 #tables {
@@ -69,14 +69,114 @@
     display: flex;
     align-items: center;
     align-content: center;
+    cursor: pointer;
 }
-
 
 #room-table .table.is-table .student-table {
     background-color: skyblue;
 }
 
+#room-table .table.is-table .student-table:has(.has-student) {
+    cursor: move;
+}
+
 #room-table .table .student-table .student-name {
     width: 100%;
     text-align: center;
+}
+
+#sidebar #student-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#sidebar #student-list li {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 3em;
+}
+
+#sidebar #student-list li .student-name {
+    flex-grow: 1;
+    min-width: 1px;  /* another wierd fix */
+    padding: 1em;
+    height: 100%;
+    cursor: move;
+    line-height: 1;
+    border-top: 1px solid black;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#sidebar #student-list li .student-name:hover {
+    background-color: lightgray;
+}
+
+#sidebar #student-list li button {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    aspect-ratio: 1 / 1;
+    outline: 1px solid black;
+}
+
+#student-list .student-edit, #add-student-button {
+    background-color: #55d355;
+    font-size: 130%;
+}
+
+#student-list .student-edit:hover, #add-student-button:hover {
+    background-color: #90ee90;
+}
+
+#student-list .student-delete {
+    background-color: #ff0000;
+    color: white;
+    font-weight: 1000;
+    font-size: 30px;
+}
+
+#student-list .student-delete:hover {
+    background-color: rgb(255, 92, 92);
+}
+
+#student-list li:last-child {
+    border-top: 1px solid black;
+    border-width: 2px;
+}
+#student-list li:last-child form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 3em;
+    border-bottom: 1px solid black;
+}
+
+#student-list li:last-child form input {
+    flex-grow: 1;
+    min-width: 1px;   /* weird fix lol */
+    height: 100%;
+    font-size: 120%;
+    text-indent: 1ch;
+    border: none;
+    outline: none;
+}
+
+#student-list li:last-child form #add-student-button {
+    border-radius: 0;
+    font-size: 240%;
+    line-height: 1;
+}
+
+.dragged .student-actions {
+    display: none;
+}
+
+#student-list-actions {
+    
 }
