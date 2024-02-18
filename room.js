@@ -40,15 +40,17 @@ function removeStudentFromRoom(name) {
             roomStudents[key] = "";
         }
     }
+    saveToStorage(KEY_ROOM, roomStudents);
 }
 
 function removeTable(td) {
-    if (td.classList.contains("has-student")) {
+    if (td.querySelector(".student-name").classList.contains("has-student")) {
         let span = td.querySelector(".student-name");
-        k = removeStudentFromRoom(span.innerText);
+        removeStudentFromRoom(span.innerText);
     }
     delete roomStudents[[td.dataset.x, td.dataset.y]];
     td.parentNode.removeChild(td);
+    saveToStorage(KEY_ROOM, roomStudents);
 }
 
 function getStudentHTML(x, y) {
