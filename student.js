@@ -76,17 +76,18 @@ function singleStudentAddForm(e) {
     }
     globalStudents.push(name);
     addStudentHTML(name);
+    input.value = "";
     saveToStorage(KEY_STUDENT, globalStudents);
 }
 
-window.addEventListener("load", (e) => {
+window.addEventListener("DOMContentLoaded", (e) => {
     studentListNode = document.getElementById("student-list");
     template_studentListItem = document.getElementById("templ-student-list-item");
-    document.getElementById("student-list-clear").addEventListener("click", (e) => {
-        while(globalStudents.length > 0) {
-            removeStudent(globalStudents[0]);
-        }
-    })
+    // document.getElementById("student-list-clear").addEventListener("click", (e) => {
+    //     while(globalStudents.length > 0) {
+    //         removeStudent(globalStudents[0]);
+    //     }
+    // })
     document.getElementById("student-list-add-form").addEventListener("submit", singleStudentAddForm);
     buildList();
-})
+});

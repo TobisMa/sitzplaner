@@ -175,5 +175,7 @@ function loaded(e) {
 
     makeRoom();
 
-}
-window.addEventListener("load", loaded)
+};
+
+
+window.addEventListener("DOMContentLoaded", loaded);
