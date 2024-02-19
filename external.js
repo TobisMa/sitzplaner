@@ -44,7 +44,7 @@ function importData(data) {
     }
     else if (typeof data === "string") {
         let lines = data.split("\n").map(value => value.trimEnd("\r"));
-        let answer = confirm("Import following students (and so on):" + lines.slice(0, 5).join("\n") + "\n...");
+        let answer = confirm("Import following students (and so on if there are more)?:\n" + lines.slice(0, 5).join("\n") + "\n...");
         if (!answer) {
             alert("Canceled");
             return;
@@ -109,14 +109,13 @@ function draggingFile(dt) {
 }
 
 function handleDrop(e) {
-    let dt = e.dataTransfer;
-    let files = dt.files;
-    if (!files) {
+    if (!draggingFile(e.dataTransfer)) {
         e.preventDefault();
         return;
     }
-
-    let file = files[0];
+    console.log(e);
+    let dt = e.dataTransfer;
+    let file = dt.files[0];
     let fileReader = new FileReader();
     fileReader.readAsBinaryString(file);
     fileReader.onloadend = (e) => { readFileImport(fileReader); };
@@ -138,7 +137,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
 });
 
 window.addEventListener("keydown", (e) => {
-    console.log(e);
     if (e.ctrlKey && e.key === "s") {
         exportData();
     }

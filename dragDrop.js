@@ -10,7 +10,10 @@ function dragOverRoom(e) {
 }
 
 function dragOverList(e) {
-    if (draggedNode.dataset.dragitem === "student-table") {
+    if(draggingFile(e.dataTransfer)) {
+        return;
+    }
+    else if (draggedNode.dataset.dragitem === "student-table") {
         let span = draggedNode.querySelector(".student-name");
         if (span.classList.contains("has-student")) {
             e.preventDefault();
@@ -26,6 +29,9 @@ function dragStartListItem(e) {
 }
 
 function dragStartTable(e) {
+    if(draggingFile(e.dataTransfer)) {
+        return;
+    }
     let td = e.target.offsetParent;
     if (!td.querySelector(".student-name").classList.contains("has-student") || !td.classList.contains("is-table")) {
         e.preventDefault();
