@@ -38,6 +38,10 @@ function dragStartTable(e) {
 }
 
 function dropOnTable(e) {
+    if (draggingFile(e.dataTransfer)) {
+        e.preventDefault();
+        return;
+    }
     let td = e.target.offsetParent;
     let name = e.dataTransfer.getData("text/plain");
     let span = td.querySelector(".student-name");
@@ -74,6 +78,10 @@ function dropOnTable(e) {
 
 function dropOnList(e) {
     e.preventDefault();
+    if (draggingFile(e.dataTransfer) || draggedNode === undefined || draggedNode.dataset.dragitem === "student-li") {
+        return;
+    }
+
     let name = e.dataTransfer.getData("text/plain");
     removeStudentFromRoom(name);  // adding to list is done as well
     let nameNode = draggedNode.querySelector(".student-name");
