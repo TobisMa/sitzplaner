@@ -2,6 +2,52 @@
     display: none;
 }
 
-#vertical-slider-container, #horizontal-slider-container {
+#vertical-slider-container, #horizontal-slider-container, #sliders {
     display: none;
+}
+
+#tables {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 12pt;
+}
+
+
+#tables tr {
+    height: 100%;
+}
+
+#tables td .student-table {
+    min-height: 3em;
+    min-width: 8ch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.student-name {
+    padding: .2em;
+    width: 100%;
+    text-align: center;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.table.is-table {
+    outline: 2px solid black;
+}
+
+
+@page {
+    margin: 0;
+}
+
+body {
+    margin: 0 1.6cm; 
 }

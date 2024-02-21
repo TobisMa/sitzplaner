@@ -8,9 +8,9 @@
     <script src="room.js"></script>
     <script src="dragDrop.js"></script>
     <script src="external.js"></script>
-    <link rel="stylesheet" href="print.css" media="print">
     <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" media="not print">
+    <link rel="stylesheet" href="print.css" media="print">
     <title>Sitzplaner</title>
 </head>
 <body>
@@ -62,15 +62,14 @@
                 <option value="9"></option>
                 <option value="10"></option>
                 <option value="11"></option>
-                <option value="12"></option>
             </datalist>
             <div id="sliders">
                 <div id="horizontal-slider-container">
-                    <input type="range" list="slider-list" min="1" max="12" step="1" value="9" id="horizontal-slider" title="Spalten" />
+                    <input type="range" list="slider-list" min="1" max="11" step="1" value="9" id="horizontal-slider" title="Spalten" />
                     <span class="slider-counter"></span>
                 </div>
                 <div id="vertical-slider-container">
-                    <input type="range" list="slider-list" min="1" max="12" step="1" value="7" id="vertical-slider" title="Reihen" />
+                    <input type="range" list="slider-list" min="1" max="11" step="1" value="7" id="vertical-slider" title="Reihen" />
                     <span class="slider-counter"></span>
                 </div>
             </div>
