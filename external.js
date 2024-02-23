@@ -155,6 +155,23 @@ function handleDrop(e) {
     fileReader.onloadend = (e) => { readFileImport(fileReader, getFileExtension(file.name)); };
 }
 
+function exportImage(e) {
+    let container = document.querySelector("#room");
+    let rw = document.querySelector("#room-table").clientWidth;
+    let rh = document.querySelector("#room").clientHeight;
+    html2canvas(container, {
+        width: rw,
+        height: rh,
+        windowWidth: rw + document.querySelector("#sidebar").clientWidth + 10,
+        windowHeight: rh
+    }).then((canvas) => {
+        let link = document.createElement('a');
+        link.download = 'Stundenplan.png';
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    })
+}
+
 window.addEventListener("DOMContentLoaded", (e) => {
     let importButton = document.getElementById("student-list-import");
     importButton.addEventListener("click", importDataHandler);

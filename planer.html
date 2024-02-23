@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" async onerror="let el = document.querySelector('#export-image-container'); el.parentNode.removeChild(el); alert('Image export is disabled probably because of an internet error.\nFailed to load external dependency')"></script>
     <script src="storage.js"></script>
     <script src="student.js"></script>
     <script src="room.js"></script>
@@ -47,6 +48,9 @@
                 </li>
                 <li class="general-action">
                     <button>Plan generieren</button>
+                </li>
+                <li class="general-action" id="export-image-container">
+                    <button onclick="exportImage(event)">Export Image</button>
                 </li>
             </ul>
             <ul id="student-list" ondragover="dragOverList(event)" ondragenter="dragOverList(event)" ondrop="dropOnList(event)">
