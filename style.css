@@ -58,8 +58,16 @@
     width: 50%;
 }
 
+#sliders #horizontal-slider-container .slider-counter::before {
+    content: "Spalten:";
+}
+
+#sliders #vertical-slider-container .slider-counter::before {
+    content: "Reihen:";
+}
+
 #sliders input[type=range] {
-    width: 80%;
+    width: 70%;
 }
 
 #room-table {
@@ -239,6 +247,7 @@
 
 button {
     cursor: pointer;
+    font-size: 12pt;
 }
 
 
