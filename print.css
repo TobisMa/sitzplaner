@@ -52,3 +52,7 @@
 body {
     margin: 0 1.6cm;
 }
+
+#pult {
+    border: 1px solid black;
+}

@@ -27,8 +27,23 @@
     height: calc(100% - 50px - 50px);   /* 50px top (sliders); 50px bottom (presets) */
     display: flex;
     align-items: center;
-    justify-content: safe;
+    justify-content: space-around;
     overflow: auto;
+    flex-flow: column nowrap;
+}
+
+#pult {
+    width: 100%;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+    min-width: 2em;
+    line-height: 1;
+    text-align: center;
+    padding: 2em 0;
+    margin: unset auto;
+    position: sticky;
+    left: 0;
 }
 
 #sliders {
@@ -50,7 +65,7 @@
 #room-table {
     height: fit-content;
     height: -moz-available;
-    margin: auto;
+    margin: 0 auto;
 
 }
 
