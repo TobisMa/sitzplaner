@@ -25,11 +25,12 @@ function loadRoom(room, width, height, reset) {
     updateSliders(width, height);
 
     if (!reset) {
-        for (const key in Object.keys(roomStudents)) {
-            if (!roomStudents[key]) {
+        Object.keys(roomStudents).forEach(key => {
+            console.log("Student ",key);
+            if (roomStudents[key] !== "") {
                 removeStudentFromRoom(roomStudents[key])
             }
-        }
+        });
     }
 
     roomStudents = room;
