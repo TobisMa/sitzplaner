@@ -9,7 +9,6 @@
     <script src="dragDrop.js"></script>
     <script src="preset.js"></script>
     <script src="external.js"></script>
-    <script src="mobile_simulation.js"></script>
     <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="print.css" media="print">
@@ -42,6 +41,14 @@
                 <button id="student-list-export">Export</button>
                 <!-- <button id="student-list-clear">L&ouml;sche Alle</button> -->
             </div>
+            <ul id="general-actions-list">
+                <li class="general-action">
+                    <button>Einstellungen</button>
+                </li>
+                <li class="general-action">
+                    <button>Plan generieren</button>
+                </li>
+            </ul>
             <ul id="student-list" ondragover="dragOverList(event)" ondragenter="dragOverList(event)" ondrop="dropOnList(event)">
                 <li id="new-student-li">
                     <form id="student-list-add-form">
