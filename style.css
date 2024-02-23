@@ -18,6 +18,7 @@
     position: absolute;
     left: clamp(150px, 20%, 300px);
     width: fit-content;
+    width: -webkit-fill-available;
     width: -moz-available;
     height: 100%;
 }
