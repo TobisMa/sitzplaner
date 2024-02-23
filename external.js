@@ -11,8 +11,8 @@ function exportData(e) {
     const content = JSON.stringify({
         students: globalStudents,
         room: roomStudents,
-        width: width,
-        height: height,
+        width: roomWidth,
+        height: roomHeight,
     });
     saveToStorage(KEY_LAST_FILENAME, filename)
     let f = new File([content], filename, {type: "text/json"});
@@ -36,34 +36,14 @@ function importData(data, filetyp) {
     
     if (typeof data === "object") {
         globalStudents = data.students ?? [];
-        roomStudents = data.room ?? {};
-        let w = data.width ?? 12;
-        let num = parseInt(w);
-        if (num === NaN) {
-            w = 12;
-        }
-        sliderHorizontal.value = w;
-        sliderHorizontal.dispatchEvent(new Event("change"));
-        
-        let h = data.width ?? 12;
-        num = parseInt(h);
-        if (num === NaN) {
-            h = 12;
-        }
-        sliderVertical.value = h;
-        sliderVertical.dispatchEvent(new Event("change"));
 
         globalStudents.forEach(addStudentHTML);  // make room removes again
         saveToStorage(KEY_STUDENT, globalStudents);
 
-        roomTables.innerHTML = "";
-        makeRoom();  // stores
-        saveToStorage(KEY_ROOM, roomStudents);
+        loadRoom(data.room ?? {}, data.width, data.height, true);
     }
     else if (typeof data === "string" && filetyp === "csv") {
         let lines = data.split("\n").slice(1);
-        console.log(lines);
-        console.log("Found csv");
         let students = lines
             .filter(line => line)
             .map(line => line.split(CSV_DELIMITER))  // convert lines to values
@@ -83,10 +63,7 @@ function importData(data, filetyp) {
         globalStudents.forEach(addStudentHTML);
         saveToStorage(KEY_STUDENT, globalStudents);
 
-        roomStudents = {};
-        roomTables.innerHTML = "";
-        makeRoom();  // stores
-        saveToStorage(KEY_ROOM, roomStudents);
+        loadRoom({}, roomWidth, roomHeight, true);
     }
     else if (typeof data === "string") {
         let lines = data.split("\n").map(value => value.trimEnd("\r"));
@@ -99,12 +76,9 @@ function importData(data, filetyp) {
         globalStudents = lines.filter(line => line);
         globalStudents.forEach(addStudentHTML);
         saveToStorage(KEY_STUDENT, globalStudents);
-
-        roomStudents = {};
-        roomTables.innerHTML = "";
-        makeRoom();  // stores
-        saveToStorage(KEY_ROOM, roomStudents);
-    }
+        
+        loadRoom({}, roomWidth, roomHeight, true);
+    }  
 }
 
 function importDataHandler(e) {

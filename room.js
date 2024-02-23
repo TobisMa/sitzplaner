@@ -9,18 +9,58 @@ let template_table;
 
 let rommStudents;
 
-let width;
-let height;
+let roomWidth;
+let roomHeight;
 
 function getArrayIndex(x, y) {
     return roomStudents[[x, y]];
 }
 
-function makeRoom() {
-    width = sliderHorizontal.value;
-    height = sliderVertical.value;
+function loadRoom(room, width, height, reset) {
+    width = width || 11;
+    height = height || 11;
+    reset = reset || false;
 
-    for (let h = 0; h < height; h++) {
+    updateSliders(width, height);
+
+    if (!reset) {
+        for (const key in Object.keys(roomStudents)) {
+            if (!roomStudents[key]) {
+                removeStudentFromRoom(roomStudents[key])
+            }
+        }
+    }
+
+    roomStudents = room;
+    roomTables.innerHTML = "";
+    makeRoom();
+    saveToStorage(KEY_ROOM, roomStudents);
+
+}
+
+function updateSliders(width, height) {
+        let w = width ?? 11;
+        let num = parseInt(w);
+        if (num === NaN) {
+            w = 11;
+        }
+        sliderHorizontal.value = w;
+        sliderHorizontal.dispatchEvent(new Event("change"));
+        
+        let h = height ?? 11;
+        num = parseInt(h);
+        if (num === NaN) {
+            h = 11;
+        }
+        sliderVertical.value = h;
+        sliderVertical.dispatchEvent(new Event("change"));
+}
+
+function makeRoom() {
+    roomWidth = sliderHorizontal.value;
+    roomHeight = sliderVertical.value;
+
+    for (let h = 0; h < roomHeight; h++) {
         roomAddRow();
     }
 }
@@ -98,7 +138,7 @@ function roomDeleteColumn() {
 }
 
 function roomAddColumn() {
-    for (let i = 0; i < height; i++) {
+    for (let i = 0; i < roomHeight; i++) {
         roomTables.rows[i].appendChild(getStudentHTML(roomTables.firstChild.children.length, i));
     }
 }
@@ -111,7 +151,7 @@ function roomDeleteRow() {
 
 function roomAddRow() {
     let tr = document.createElement("tr");
-    for (let w = 0; w < width; w++) {
+    for (let w = 0; w < roomWidth; w++) {
         tr.appendChild(getStudentHTML(w, roomTables.children.length));
     }
     roomTables.appendChild(tr);
@@ -121,8 +161,8 @@ function updateRoom() {
     const nw = sliderHorizontal.value;
     const nh = sliderVertical.value;
 
-    const wd = nw - width;
-    const hd = nh - height;
+    const wd = nw - roomWidth;
+    const hd = nh - roomHeight;
 
     if (wd < 0) {
         for (let i = 0; i < -wd; i++) {
@@ -146,8 +186,8 @@ function updateRoom() {
         }
     }
 
-    width = nw;
-    height = nh;
+    roomWidth = nw;
+    roomHeight = nh;
 }
 
 function loaded(e) {
@@ -159,8 +199,8 @@ function loaded(e) {
     sliderHorizontal.value = loadFromStorage(KEY_ROOM_WIDTH, 9);
     sliderVertical.value = loadFromStorage(KEY_ROOM_HEIGHT, 7);
 
-    width = sliderHorizontal.value;
-    height = sliderVertical.value;
+    roomWidth = sliderHorizontal.value;
+    roomHeight = sliderVertical.value;
 
     let sliderCounterH = document.querySelector("#horizontal-slider-container .slider-counter");
     sliderCounterH.innerText = sliderHorizontal.value;

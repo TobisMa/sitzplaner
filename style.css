@@ -62,6 +62,8 @@
     min-width: 20ch;
     outline: 1px solid black;
     border-collapse: collapse;
+    width: min-content;
+    overflow-wrap: anywhere;
 }
 
 #room-table .table .student-table {
