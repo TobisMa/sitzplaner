@@ -37,12 +37,16 @@
 
 .table {
     border-collapse: collapse;
+    width: min-content;
 }
 
 .table.is-table {
     outline: 2px solid black;
 }
 
+#presets {
+    display: none;
+}
 
 @page {
     margin: 0;

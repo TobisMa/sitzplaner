@@ -23,7 +23,7 @@
 
 #room {
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 50px - 50px);   /* 50px top (sliders); 50px bottom (presets) */
     display: flex;
     align-items: center;
     justify-content: safe;
@@ -195,4 +195,32 @@
 
 button {
     cursor: pointer;
+}
+
+
+#presets {
+    position: absolute;
+    height: 50px;
+    bottom: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+#presets .preset {
+    border: none;
+    border-radius: 0;
+    flex: 1;
+    height: 100%;
+    font-size: 1.5em;
+    background-color: #e9e9ed;
+}
+
+#presets .preset:nth-child(2n) {
+    background-color: #cfcfd3;
+}
+
+#presets .preset:hover, #presets .preset:active {
+    background-color: #9b9b9b;
 }

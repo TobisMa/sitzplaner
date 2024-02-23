@@ -17,6 +17,7 @@ function getArrayIndex(x, y) {
 }
 
 function loadRoom(room, width, height, reset) {
+    console.debug("Loading new room");
     width = width || 11;
     height = height || 11;
     reset = reset || false;
