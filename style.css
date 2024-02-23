@@ -3,7 +3,7 @@
     position: fixed;
     width: clamp(150px, 20%, 300px);
     height: 100%;
-    border-right: 1px solid black;
+    border-right: 3px solid black;
     left: 0;
     top: 0;
     overflow: auto;
@@ -259,6 +259,7 @@ button {
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
+    border-top: 3px solid black;
 }
 
 #presets .preset {
