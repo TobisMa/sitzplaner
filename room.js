@@ -26,8 +26,8 @@ function loadRoom(room, width, height, reset) {
 
     if (!reset) {
         Object.keys(roomStudents).forEach(key => {
-            console.log("Student ",key);
             if (roomStudents[key] !== "") {
+                console.debug("remove student from room", roomStudents[key]);
                 removeStudentFromRoom(roomStudents[key])
             }
         });
