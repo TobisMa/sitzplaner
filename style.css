@@ -279,3 +279,27 @@ button {
 #presets .preset:hover, #presets .preset:active {
     background-color: #9b9b9b;
 }
+
+#settings-dialog {
+    margin-top: 10%;
+}
+
+#settings-dialog .setting-container {
+    width: 100%;
+    margin: .5em 0;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8ch;
+}
+
+#settings-dialog select {
+    padding: .25em .5em;
+    font-size: 10pt;
+    cursor: pointer;
+}
+
+#settings-dialog #settings-close-button {
+    text-align: right;
+}
