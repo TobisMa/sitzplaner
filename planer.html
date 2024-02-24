@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" async onerror="let el = document.querySelector('#export-image-container'); el.parentNode.removeChild(el); alert('Image export is disabled probably because of an internet error.\nFailed to load external dependency')"></script>
     <script src="storage.js"></script>
+    <script src="settings.js"></script>
     <script src="student.js"></script>
     <script src="room.js"></script>
     <script src="dragDrop.js"></script>
@@ -44,7 +45,7 @@
             </div>
             <ul id="general-actions-list">
                 <li class="general-action">
-                    <button>Einstellungen</button>
+                    <button onclick="openSettings(event)">Einstellungen</button>
                 </li>
                 <li class="general-action">
                     <button>Plan generieren</button>
@@ -91,12 +92,37 @@
                 <div id="pult">Pult / Lehrertisch</div>
             </div>
             <div id="presets">
-                <button class="preset" data-presetname="empty">Keine</button>
-                <button class="preset" data-presetname="frontal">Reihen</button>
-                <button class="preset" data-presetname="u-form">U-Form</button>
-                <button class="preset" data-presetname="groups">Gruppen</button>
+                <button class="preset" data-presetname="empty" title="11x11, keine Tische ausgew&auml;hlt">Keine</button>
+                <button class="preset" data-presetname="frontal" title="4 Reihen&#10;---- ----&#10;---- ----&#10;---- ----&#10;---- ----&#10;  Pult  ">Reihen</button>
+                <button class="preset" data-presetname="u-form" title="Tisch U-Form">U-Form</button>
+                <button class="preset" data-presetname="groups" title="5 6-er Gruppentische">Gruppen</button>
             </div>
         </section>
+        <div class="setting-container">
+            <dialog id="settings-dialog">
+                <section id="export">
+                    <h2>Export</h2>
+                    <div class="setting-container">
+                        <label for="setting-default-export">Format, wenn auf "Export" gedrückt wird</label>
+                        <select id="setting-default-export">
+                            <option value="splan">.splan Projektdatei</option>
+                            <option value="image">Bild</option>
+                        </select>
+                    </div>
+                    <div class="setting-container">
+                        <label for="setting-export-format">Bildexportformat</label>
+                        <select id="setting-export-format">
+                            <option value="image/png">PNG (verlustfrei)</option>
+                            <option value="image/jpeg">JPEG (minimiert)</option>
+                        </select>
+                    </div>
+                </section>
+                <!-- <hr>
+                <section id="Algorithm">
+
+                </section> -->
+            </dialog>
+        </div>
     </main>
 </body>
 </html>

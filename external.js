@@ -3,18 +3,25 @@ const CSV_DELIMITER = ";";
 
 
 function exportData(e) {
-    let filename = prompt("Filename", loadFromStorage(KEY_LAST_FILENAME, "sitzplan.splan"));
+    let filename = prompt("Filename:", loadFromStorage(KEY_LAST_FILENAME, "sitzplan.splan"));
     if (!filename) {
         console.debug("Canceled by user");
         return;
     }
+    filename = ensureFileEnding(filename, ".splan");
+    saveToStorage(KEY_LAST_FILENAME, filename)
+
+    if (setting_defaultExport === "image") {
+        exportImage(e, filename);
+        return;
+    }
+
     const content = JSON.stringify({
         students: globalStudents,
         room: roomStudents,
         width: roomWidth,
         height: roomHeight,
     });
-    saveToStorage(KEY_LAST_FILENAME, filename)
     let f = new File([content], filename, {type: "text/json"});
     
     const link = document.createElement('a');
@@ -155,7 +162,8 @@ function handleDrop(e) {
     fileReader.onloadend = (e) => { readFileImport(fileReader, getFileExtension(file.name)); };
 }
 
-function exportImage(e) {
+function exportImage(e, filename) {
+    filename = filename || "Stundenplan";
     let container = document.querySelector("#room");
     let rw = document.querySelector("#room-table").clientWidth;
     let rh = document.querySelector("#room").clientHeight;
@@ -166,10 +174,19 @@ function exportImage(e) {
         windowHeight: rh
     }).then((canvas) => {
         let link = document.createElement('a');
-        link.download = 'Stundenplan.png';
-        link.href = canvas.toDataURL("image/png");
+        link.download = setting_imageExportFormat === "image/png" ? ensureFileEnding(filename, ".png") : ensureFileEnding(filename, ".jpeg");
+        console.debug(link.download);
+        console.debug(setting_imageExportFormat);
+        link.href = canvas.toDataURL(setting_imageExportFormat);
         link.click();
     })
+}
+
+function ensureFileEnding(name, ending) {
+    if (!name.endsWith(ending)) {
+        return name + ending;
+    }
+    return name;
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
