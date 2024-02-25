@@ -89,7 +89,7 @@ function dropOnList(e) {
     }
 
     let name = e.dataTransfer.getData("text/plain");
-    removeStudentFromRoom(name);  // adding to list is done as well
+    removeStudentFromRoom(name);  // adding to HTML list is done as well
     let nameNode = draggedNode.querySelector(".student-name");
     nameNode.innerText = "";
     nameNode.classList.remove("has-student");

@@ -48,6 +48,8 @@ function importData(data, filetyp) {
         saveToStorage(KEY_STUDENT, globalStudents);
 
         loadRoom(data.room ?? {}, data.width, data.height, true);
+
+        loadRules(data.rules ?? {});
     }
     else if (typeof data === "string" && filetyp === "csv") {
         let lines = data.split("\n").slice(1);

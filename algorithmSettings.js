@@ -205,6 +205,13 @@ function addSingleStudentToRuleList(name, list, arr) {
     list.appendChild(li);
 }
 
+function loadRules(rules) {
+    sitWith = rules.sitWith ?? [];
+    forbiddenNeighbours = rules.forbiddenNeighbours ?? [];
+    firstRow = rules.firstRow ?? [];
+    notLastRow = rules.notLastRow ?? [];
+}
+
 window.addEventListener("keydown", (e) => {
     if (contextMenuOpen && e.key === "Escape") {
         e.preventDefault();
@@ -232,15 +239,10 @@ window.addEventListener("DOMContentLoaded", (e) => {
     template_sittingRulesDialog = document.getElementById("templ-rules-dialog");
     template_ruleSingleStudent = document.getElementById("templ-single-student-sit-rule-item");
 
-    let rules = loadFromStorage(KEY_RULES, {
+    loadRules(loadFromStorage(KEY_RULES, {
         sitWith: [],
         forbiddenNeighbours: [],
         firstRow: [],
         notLastRow: []
-    });
-
-    sitWith = rules.sitWith ?? [];
-    forbiddenNeighbours = rules.forbiddenNeighbours ?? [];
-    firstRow = rules.firstRow ?? [];
-    notLastRow = rules.notLastRow ?? [];
+    }));
 })
