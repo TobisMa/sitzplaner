@@ -81,15 +81,17 @@
                 </details>
                 <details>
                     <summary>Sch&uuml;ler, die <b>nicht</b> nebeneinander dürfen</summary>
-                    <ul id="students-forbidden-neighbours">
+                    <ul id="students-forbidden-neighbours" data-object="forbidden-neighbours">
 
                     </ul>
+                    <button onclick="addStudentCombo('students-forbidden-neighbours')">Neue Regel</button>
                 </details>
                 <details>
                     <summary>Sch&uuml;ler, die nebeneinander <b>sollen</b></summary>
-                    <ul id="students-sit-with">
+                    <ul id="students-sit-with" data-object="sitWith">
                         
                     </ul>
+                    <button onclick="addStudentCombo('students-sit-with')">Neue Regel</button>
                 </details>
                 <hr>
                 <button onclick="document.getElementById('sitting-rules').close()" id="close-rules">Schlie&szlig;en</button>

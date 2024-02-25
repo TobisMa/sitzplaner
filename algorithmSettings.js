@@ -1,6 +1,7 @@
 let template_studentListContextMenu;
 let template_sittingRulesDialog;
 let template_ruleSingleStudent;
+let template_studentCombinationItem;
 
 let sitWith = {};
 let forbiddenNeighbours = {};
@@ -205,6 +206,96 @@ function addSingleStudentToRuleList(name, list, arr) {
     list.appendChild(li);
 }
 
+function addStudentCombo(listId) {
+    let lst = document.getElementById(listId);
+    let frag = template_studentCombinationItem.content.cloneNode(true);
+    let [s1, s2] = frag.querySelectorAll("input");
+    let [d1, d2] = frag.querySelectorAll("datalist");
+    
+    let lid1 = "dl-combo-" + listId + lst.children.length + "1";
+    let lid2 = "dl-combo-" + listId + lst.children.length + "2";
+
+    d1.id = lid1;
+    d2.id = lid2;
+
+    s1.setAttribute("list", lid1);
+    s1.dataset.oldvalue = "";
+
+    s2.setAttribute("list", lid2);
+    s2.dataset.oldvalue = "";
+
+    globalStudents.forEach(name => {
+        let opt1 = document.createElement("option");
+        let opt2 = document.createElement("option");
+
+        opt1.value = name;
+        opt1.innerText = name;
+        opt2.value = name;
+        opt2.innerText = name;
+
+        d1.appendChild(opt1);
+        d2.appendChild(opt2);
+    });
+
+    s1.addEventListener("change", (e) => {
+        let n1 = s1.value;
+        let oldn1 = s1.dataset.oldvalue;
+        let n2 = s2.value;
+        removeComboObject(oldn1, n2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+        if (globalStudents.includes(n1) && n2) {
+            addComboObject(n1, n2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+        }
+        s1.dataset.oldvalue = n1;
+    });
+
+    s2.addEventListener("change", (e) => {
+        let n1 = s1.value;
+        let n2 = s2.value;
+        let oldn2 = s2.dataset.oldvalue;
+        removeComboObject(n1, oldn2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+        if (globalStudents.includes(n2) && n1) {
+            addComboObject(n1, n2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+        }
+        s2.dataset.oldvalue = n2;
+    });
+
+    let li = frag.querySelector("li");
+    frag.querySelector(".delete-button").addEventListener("click", (e) => {
+        removeComboObject(s1.value, s2.value, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+        lst.removeChild(li);
+    });
+
+    lst.appendChild(frag);
+}
+
+function removeComboObject(name1, name2, obj) {
+    console.debug(name1, name2, obj);
+    if (obj[name1] && obj[name1].includes(name2)) {
+        obj[name1].splice(obj[name1].indexOf(name2), 1);
+        console.log("Deleted by name1");
+    }
+    if (obj[name2] && obj[name2].includes(name1)) {
+        obj[name2].splice(obj[name2].indexOf(name1), 1);
+        console.log("Deleted by name2");
+    }
+    console.debug(name1, name2, obj);
+}
+
+function addComboObject(name1, name2, obj) {
+    if (name1 === name2) {
+        return;
+    }
+    if (obj[name1] === undefined) {
+        obj[name1] = [];
+    }
+    obj[name1].push(name2);
+    
+    if (obj[name2] === undefined) {
+        obj[name2] = [];
+    }
+    obj[name2].push(name1);
+}
+
 function loadRules(rules) {
     sitWith = rules.sitWith ?? [];
     forbiddenNeighbours = rules.forbiddenNeighbours ?? [];
@@ -238,6 +329,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     template_studentListContextMenu = document.getElementById("templ-student-contextmenu");
     template_sittingRulesDialog = document.getElementById("templ-rules-dialog");
     template_ruleSingleStudent = document.getElementById("templ-single-student-sit-rule-item");
+    template_studentCombinationItem = document.getElementById("templ-student-combination-item");
 
     loadRules(loadFromStorage(KEY_RULES, {
         sitWith: [],
