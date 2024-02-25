@@ -9,7 +9,6 @@ grayScreen.style.background = "#3339";
 let dialogs = 0;
 
 function customDialog(title, body, options) {
-    console.debug("Custom dialog options", options);
     dialogs++;
     if (body == undefined || !title) {
         console.error("custom dialog expected a title and a list of objects for body");
@@ -44,7 +43,6 @@ function customDialog(title, body, options) {
                 break;
 
             case "entry":
-                console.log(element);
                 let inputNode = document.createElement("input");
                 inputNode.type = "text";
                 inputNode.placeholder = element.placeholder ?? "";
@@ -64,8 +62,6 @@ function customDialog(title, body, options) {
                     dataListNode.id = "datalist" + idNum;
 
                     inputNode.setAttribute("list", dataListNode.id);
-
-                    console.log(inputNode.list);
 
                     element.selection.forEach(option => {
                         let opt = document.createElement("option");
@@ -129,14 +125,12 @@ function customDialog(title, body, options) {
 
     document.body.appendChild(dialogNode);
     dialogNode.showModal();
-    LeaveVimCmdMode();  // focuses the RAM input unconditionally
     if (startCallback) {
         startCallback(dialogNode);
     }
     if (focusStart) {
         let element = document.querySelector("#customDialog #" + focusStart);
         if (element !== null) {
-            console.debug("Focusing", element);
             element.focus();
             if (element.localName === "input" && element.type === "text") {
                 element.select();
@@ -223,7 +217,6 @@ function promptDialog(question, defaultInput, selection) {
                     id: "textInput",
                     placeholder: selection ? "Click for suggestions" : undefined,
                     onvalidate: (e) => {
-                        console.log(e);
                         if (e.key === "Enter") {
                             let input = document.querySelector("#customDialog #textInput").value  // reference to entry
                             document.querySelector("#customDialog").close();
