@@ -19,7 +19,7 @@ function openSettings() {
         setting_imageExportFormat = e.target.value;
         saveToStorage(KEY_SETTING_IMAGE_EXPORT_FORMAT, setting_imageExportFormat);
     });
-    settingModal.show();
+    settingModal.showModal();
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {

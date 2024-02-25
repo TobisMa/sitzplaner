@@ -40,7 +40,7 @@
             <div id="student-contextmenu">
                 <ul>
                     <li>
-                        <button>Schülerregeln</button>
+                        <button id="btn-sitrules">Sitzregelen</button>
                     </li>
                     <hr>
                     <li>
@@ -53,6 +53,63 @@
                     </li>
                 </ul>
             </div>
+        </template>
+        <template id="templ-rules-dialog">
+            <dialog id="sitting-rules">
+                <h2>Sitzregeln</h2>
+                <details>
+                    <summary>Soll vorne sitzen</summary>
+                    <ul id="students-sitting-in-front">
+
+                    </ul>
+                    <form class="student-entry" id="add-student-front">
+                        <datalist id="student-in-front"></datalist>
+                        <input type="text" list="student-in-front" value="" name="student-name" placeholder="Sch&uuml;lername" required />
+                        <button id="btn-sit-in-front">+</button>
+                    </form>
+                </details>
+                <details>
+                    <summary>Darf nicht hinten sitzen</summary>
+                    <ul id="students-not-sitting-in-back">
+
+                    </ul>
+                    <form class="student-entry" id="add-student-not-in-back" autocomplete="off">
+                        <datalist id="student-not-in-back"></datalist>
+                        <input type="text" list="student-not-in-back" value="" name="student-name" placeholder="Sch&uuml;lername" required autocomplete="off" />
+                        <button id="btn-sit-in-front">+</button>
+                    </form>
+                </details>
+                <details>
+                    <summary>Sch&uuml;ler, die <b>nicht</b> nebeneinander dürfen</summary>
+                    <ul id="students-forbidden-neighbours">
+
+                    </ul>
+                </details>
+                <details>
+                    <summary>Sch&uuml;ler, die nebeneinander <b>sollen</b></summary>
+                    <ul id="students-sit-with">
+                        
+                    </ul>
+                </details>
+                <hr>
+                <button onclick="document.getElementById('sitting-rules').close()" id="close-rules">Schlie&szlig;en</button>
+            </dialog>
+        </template>
+        <template id="templ-single-student-sit-rule-item">
+            <li class="single-student-sit-rule-item">
+                <div class="student-name"></div>
+                <button class="delete-button">X</button>
+            </li>
+        </template>
+        <template id="templ-student-combination-item">
+            <li class="student-combination">
+                <datalist></datalist>
+                <datalist></datalist>
+                <input type="text" value="" placeholder="Sch&uuml;lername" />
+                <span>-</span>
+                <input type="text" value="" placeholder="Sch&uuml;lername" />
+                <button class="delete-button">X</button>
+            </li>
         </template>
     </div> 
     <main id="content">

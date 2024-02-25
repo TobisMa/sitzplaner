@@ -346,3 +346,74 @@ button {
 #settings-dialog #settings-close-button {
     text-align: right;
 }
+
+
+#sitting-rules {
+    position: fixed;
+    top: 5%;
+    max-width: 90%;
+    overflow: auto;
+    margin-top: 0;
+}
+
+#sitting-rules details {
+    margin-bottom: .5em;
+}
+
+#sitting-rules details summary {
+    cursor: pointer;
+}
+
+#sitting-rules details ul {
+    list-style: none;
+    padding-left: 1em;
+    margin: 0;
+}
+
+#sitting-rules details ul .single-student-sit-rule-item {
+    padding: 0 .3em;
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    border-bottom: 1px solid black;
+    height: 2em;
+}
+
+
+#sitting-rules details .student-entry {
+    height: 1.5em;
+    margin-top: 3px;
+}
+
+.student-entry input {
+    height: 100%;
+    border: none;
+    outline: 1px solid black;
+    border-radius: 0;
+    text-indent: 1ch;
+}
+
+.student-entry button {
+    border: none;
+    border-radius: 0;
+    background-color: #55d355;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    line-height: 1;
+}
+
+.single-student-sit-rule-item .student-name {
+    flex-grow: 1;
+    min-width: 1px;  /* just preventing trouble */
+    padding: .25em 0;
+}
+
+#sitting-rules .delete-button {
+    border: none;
+    border-radius: 0;
+    aspect-ratio: 1 / 1;
+    line-height: 1;
+    background-color: red;
+    color: white;
+    height: 80%;
+}
