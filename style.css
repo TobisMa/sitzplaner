@@ -280,6 +280,49 @@ button {
     background-color: #9b9b9b;
 }
 
+#student-contextmenu {
+    position: fixed;
+    background-color: white;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 3px;
+    border: 1px solid black;
+}
+
+#student-contextmenu hr {
+    margin: 0;
+}
+
+#student-contextmenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#student-contextmenu ul li :is(label, button) {
+    padding: .5em 10px;
+    cursor: pointer;
+}
+
+#student-contextmenu ul label {
+    display: inline-block;
+}
+
+#student-contextmenu ul label:hover {
+    font-style: italic;
+}
+
+#student-contextmenu ul button:not(:hover) {
+    background-color: white;
+}
+
+#student-contextmenu button {
+    border: none;
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+}
+
+
 #settings-dialog {
     margin-top: 10%;
 }

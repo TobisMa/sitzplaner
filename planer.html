@@ -10,16 +10,18 @@
     <script src="room.js"></script>
     <script src="dragDrop.js"></script>
     <script src="preset.js"></script>
+    <script src="algorithmSettings.js"></script>
     <script src="external.js"></script>
     <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="customDialog.css">
     <link rel="stylesheet" href="print.css" media="print">
     <title>Sitzplaner</title>
 </head>
 <body>
     <div id="template-container">
         <template id="templ-student-list-item">
-            <li draggable="true" ondragstart="dragStartListItem(event)" data-dragitem="student-li" oncontextmenu="event.preventDefault(); console.log(event.target, event.timeStamp);">
+            <li title="Drag onto a blue field (table)" draggable="true" ondragstart="dragStartListItem(event)" data-dragitem="student-li" oncontextmenu="studentContextmenu(event)">
                 <div class="student-name">
                     
                 </div>
@@ -34,6 +36,24 @@
                 </div>
             </td>
         </template>
+        <template id="templ-student-contextmenu">
+            <div id="student-contextmenu">
+                <ul>
+                    <li>
+                        <button>Schülerregeln</button>
+                    </li>
+                    <hr>
+                    <li>
+                        <input type="checkbox" id="first-row" />
+                        <label for="first-row">Erste Reihe</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="not-last-row" />
+                        <label for="not-last-row">Nicht letzte Reihe</label>
+                    </li>
+                </ul>
+            </div>
+        </template>
     </div> 
     <main id="content">
         <section id="sidebar">
@@ -47,11 +67,11 @@
                 <li class="general-action">
                     <button onclick="openSettings(event)">Einstellungen</button>
                 </li>
-                <li class="general-action">
-                    <button>Plan generieren</button>
-                </li>
                 <li class="general-action" id="export-image-container">
                     <button onclick="exportImage(event)">Export Image</button>
+                </li>
+                <li class="general-action">
+                    <button>Plan generieren</button>
                 </li>
             </ul>
             <ul id="student-list" ondragover="dragOverList(event)" ondragenter="dragOverList(event)" ondrop="dropOnList(event)">

@@ -129,7 +129,6 @@ function loadTablePreset(name) {
 
 window.addEventListener("DOMContentLoaded", (e) => {
     document.querySelectorAll("#presets .preset").forEach(container => {
-        console.debug(container);
         container.addEventListener("click", (e) => {
             loadTablePreset(e.target.dataset.presetname);
         });
