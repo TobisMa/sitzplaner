@@ -205,14 +205,14 @@
     display: none;
 }
 
-#student-list-actions {
+.student-list-actions {
     height: 3em;
     display: flex;
     align-items: center;
     /* justify-content: space-evenly; */
 }
 
-#student-list-actions button {
+.student-list-actions button {
     height: 100%;
     border: none;
     outline: 1px solid black; 

@@ -118,20 +118,23 @@
     <main id="content">
         <section id="sidebar">
             <h2>Sch&uuml;ler</h2>
-            <div id="student-list-actions">
+            <div class="student-list-actions">
                 <button id="student-list-import">Import</button>
                 <button id="student-list-export">Export</button>
                 <!-- <button id="student-list-clear">L&ouml;sche Alle</button> -->
             </div>
             <ul id="general-actions-list">
-                <li class="general-action">
-                    <button onclick="openSettings(event)">Einstellungen</button>
-                </li>
                 <li class="general-action" id="export-image-container">
                     <button onclick="exportImage(event)">Export Image</button>
                 </li>
                 <li class="general-action">
-                    <button id="btn-generate-plan">Plan generieren</button>
+                    <button onclick="openSettings(event)">Einstellungen</button>
+                </li>
+                <li class="general-action">
+                    <div class="student-list-actions">
+                        <button onclick="sittingRulesDialogOpen()">Regeln</button>
+                        <button id="btn-generate-plan">Plan generieren</button>
+                    </div>
                 </li>
             </ul>
             <ul id="student-list" ondragover="dragOverList(event)" ondragenter="dragOverList(event)" ondrop="dropOnList(event)">
@@ -197,10 +200,18 @@
                         </select>
                     </div>
                 </section>
-                <!-- <hr>
+                <hr>
                 <section id="Algorithm">
-
-                </section> -->
+                    <h2>Algorithmus</h2>
+                    <div class="setting-container">
+                        <label for="setting-algo-randomness">Algorithmuszufallsbalance</label>
+                        <select id="setting-algo-randomness">
+                            <option value="0">Deterministisch</option>
+                            <option value="1">Möglichst weit vorne</option>
+                            <option value="2">Ganz zufällig</option>
+                        </select>
+                    </div>
+                </section>
                 <hr>
                 <section id="settings-close-button">
                     <button onclick="document.querySelector('#settings-dialog').close()">Schlie&szlig;en</button>

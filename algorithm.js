@@ -1,6 +1,3 @@
-let randomness = 1;
-
-
 async function generatePlan() {
     let dummySeats = [];
     Object.keys(roomStudents).forEach(s => {
@@ -28,7 +25,7 @@ async function generatePlan() {
         dummy.neighbour = dummy.neighbour.concat((sitWithRule[dummy.student] ?? []).map(name => getDummyStudentByName(dummyStudents, name)));
     });
 
-    let algo = new SeatingAlgorithm(dummySeats, dummyStudents, randomness);
+    let algo = new SeatingAlgorithm(dummySeats, dummyStudents, setting_algo_randomness);
     let res = algo.compute();
 
     if (res.error) {
