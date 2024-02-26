@@ -122,7 +122,7 @@ function loadTablePreset(name) {
         console.debug("Preset name not found:", name);
         return;
     }
-    let p = presets[name];
+    let p = JSON.parse(JSON.stringify(presets[name]));
     loadRoom(p.room, p.width, p.height, false);
 }
 
