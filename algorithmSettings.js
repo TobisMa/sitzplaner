@@ -246,6 +246,7 @@ function addStudentCombo(listId) {
             addComboObject(n1, n2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
         }
         s1.dataset.oldvalue = n1;
+        updateRulesToStorage();
     });
 
     s2.addEventListener("change", (e) => {
@@ -257,6 +258,7 @@ function addStudentCombo(listId) {
             addComboObject(n1, n2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
         }
         s2.dataset.oldvalue = n2;
+        updateRulesToStorage();
     });
 
     let li = frag.querySelector("li");
