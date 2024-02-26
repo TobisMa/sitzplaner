@@ -8,10 +8,21 @@ async function generatePlan() {
         dummySeats.push(new DummySeat(...s.split(",").map(v => parseInt(v))));
     })
 
+    let minX = Math.min(...dummySeats.map(seat => seat.x));
+    let maxX = Math.max(...dummySeats.map(seat => seat.x));
+    let middle = (minX + maxX) / 2;
+
+    console.debug(dummySeats.map(seat => {console.log(seat); return seat.x}));
+    console.log(middle, maxX, minX);
+
     // sort by y desc then x desc
     dummySeats.sort((a, b) => {
         if (a.y === b.y) {
-            return b.x - a.x;
+            if (setting_algo_randomness === 2) {
+                return Math.abs(a.x - middle) - Math.abs(b.x - middle);
+            } else {
+                return b.x - a.x;
+            }
         }
         return b.y - a.y;
     });
@@ -272,7 +283,7 @@ class SeatingAlgorithm {
         this.seats.forEach((seat) => {
             if (seat.dummyStudent == null) freeSeats.push(seat);
         });
-        if (this.randomness == 2) {
+        if (this.randomness === 3) {
             this.shuffleArray(freeSeats);
         }
         const result = this.recSolve(studentOrder, freeSeats); //slice to copy

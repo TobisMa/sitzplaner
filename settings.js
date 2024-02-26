@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     settingModal = document.getElementById("settings-dialog");
     setting_defaultExport = loadFromStorage(KEY_SETTING_DEFAULT_EXPORT, "splan");
     setting_imageExportFormat = loadFromStorage(KEY_SETTING_IMAGE_EXPORT_FORMAT, "image/png");
-    setting_algo_randomness = loadFromStorage(KEY_SETTING_ALOG_RANDOMNESS, 1);
+    setting_algo_randomness = loadFromStorage(KEY_SETTING_ALOG_RANDOMNESS, 2);
 
     let defaultExport = settingModal.querySelector("#setting-default-export");
     defaultExport.value = setting_defaultExport;
@@ -37,7 +37,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
         console.log("chnage");
         setting_algo_randomness = parseInt(algo_randomness.value);
         if (isNaN(setting_algo_randomness)) {
-            setting_algo_randomness = 1;
+            algo_randomness.value = 2;
+            setting_algo_randomness = 2;
         }
         saveToStorage(KEY_SETTING_ALOG_RANDOMNESS, setting_algo_randomness);
     })
