@@ -10,6 +10,14 @@ async function generatePlan() {
         dummySeats.push(new DummySeat(...s.split(",").map(v => parseInt(v))));
     })
 
+    // sort by y desc then x desc
+    dummySeats.sort((a, b) => {
+        if (a.y === b.y) {
+            return b.x - a.x;
+        }
+        return b.y - a.y;
+    });
+
     let dummyStudents = []
     globalStudents.forEach(name => {
         dummyStudents.push(new DummyStudent(name, firstRow.includes(name), notLastRow.includes(name)));
