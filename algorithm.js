@@ -1,7 +1,8 @@
 async function generatePlan() {
     let dummySeats = [];
+    
     Object.keys(roomStudents).forEach(s => {
-        if (roomStudents[s]) {
+        if (roomStudents[s] !== "") {
             removeStudentFromRoom(roomStudents[s]);
         }
         dummySeats.push(new DummySeat(...s.split(",").map(v => parseInt(v))));
@@ -30,11 +31,11 @@ async function generatePlan() {
 
     if (res.error) {
         alert(res.message);
-        return;
     }
-
-    for (const seat of res.seats) {
-        roomStudents[[seat.x, seat.y]] = seat.dummyStudent ? seat.dummyStudent.student : "";
+    else {
+        for (const seat of res.seats) {
+            roomStudents[[seat.x, seat.y]] = seat.dummyStudent ? seat.dummyStudent.student : "";
+        }
     }
     loadRoom(roomStudents, roomWidth, roomHeight, true);
 } 
@@ -49,9 +50,8 @@ function getDummyStudentByName(dummies, name) {
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
-    console.log("Hello");
     document.getElementById("btn-generate-plan").addEventListener("click", async function (e) {
-        generatePlan();
+        await generatePlan();
     });
 })
 

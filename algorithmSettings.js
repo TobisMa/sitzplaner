@@ -334,8 +334,8 @@ function addComboObject(name1, name2, obj) {
 }
 
 function loadRules(rules) {
-    sitWithRule = rules.sitWith ?? [];
-    forbiddenNeighboursRule = rules.forbiddenNeighbours ?? [];
+    sitWithRule = rules.sitWith ?? {};
+    forbiddenNeighboursRule = rules.forbiddenNeighbours ?? {};
     firstRowRule = rules.firstRow ?? [];
     notLastRowRule = rules.notLastRow ?? [];
 }
@@ -369,8 +369,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
     template_studentCombinationItem = document.getElementById("templ-student-combination-item");
 
     loadRules(loadFromStorage(KEY_RULES, {
-        sitWith: [],
-        forbiddenNeighbours: [],
+        sitWith: {},
+        forbiddenNeighbours: {},
         firstRow: [],
         notLastRow: []
     }));
