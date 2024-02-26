@@ -3,20 +3,20 @@ let template_sittingRulesDialog;
 let template_ruleSingleStudent;
 let template_studentCombinationItem;
 
-let sitWith = {};
-let forbiddenNeighbours = {};
-let firstRow = [];
-let notLastRow = [];
+let sitWithRule = {};
+let forbiddenNeighboursRule = {};
+let firstRowRule = [];
+let notLastRowRule = [];
 let contextMenuOpen = false;
 
 const KEY_RULES = "rules";
 
 function updateRulesToStorage() {
     saveToStorage(KEY_RULES, {
-        sitWith,
-        forbiddenNeighbours,
-        firstRow,
-        notLastRow
+        sitWith: sitWithRule,
+        forbiddenNeighbours: forbiddenNeighboursRule,
+        firstRow: firstRowRule,
+        notLastRow: notLastRowRule
     });
     buildDialogDataLists();
 }
@@ -31,7 +31,7 @@ function buildDialogDataLists() {
     let firstRowDl = document.querySelector("#student-in-front");
     firstRowDl.innerHTML = ""; // clear
     globalStudents.forEach(name => {
-        if (firstRow.includes(name)) {
+        if (firstRowRule.includes(name)) {
             return;
         }
         let opt = document.createElement("option");
@@ -42,7 +42,7 @@ function buildDialogDataLists() {
     let notLastRowDl = document.querySelector("#student-not-in-back");
     notLastRowDl.innerHTML = ""; // clear
     globalStudents.forEach(name => {
-        if (notLastRow.includes(name)) {
+        if (notLastRowRule.includes(name)) {
             return;
         }
         let opt = document.createElement("option");
@@ -54,21 +54,21 @@ function buildDialogDataLists() {
 
 
 function toggleFirstRow(name) {
-    if (firstRow.includes(name)) {
-        firstRow.splice(firstRow.indexOf(name), 1);
+    if (firstRowRule.includes(name)) {
+        firstRowRule.splice(firstRowRule.indexOf(name), 1);
     }
     else {
-        firstRow.push(name);
+        firstRowRule.push(name);
     }
     updateRulesToStorage();
 }
 
 function toggleNotLastRow(name) {
-    if (notLastRow.includes(name)) {
-        notLastRow.splice(notLastRow.indexOf(name), 1);
+    if (notLastRowRule.includes(name)) {
+        notLastRowRule.splice(notLastRowRule.indexOf(name), 1);
     }
     else {
-        notLastRow.push(name);
+        notLastRowRule.push(name);
     }
     updateRulesToStorage();
 }
@@ -101,13 +101,13 @@ function openContextMenu(e) {
     firstRowCb.addEventListener("change", (e) => {
         toggleFirstRow(studentName);
     })
-    firstRowCb.checked = firstRow.includes(studentName);
+    firstRowCb.checked = firstRowRule.includes(studentName);
 
     let notLastRowCb = containerNode.querySelector("#not-last-row");
     notLastRowCb.addEventListener("change", (e) => {
         toggleNotLastRow(studentName);
     })
-    notLastRowCb.checked = notLastRow.includes(studentName);
+    notLastRowCb.checked = notLastRowRule.includes(studentName);
 
     let btnRules = containerNode.querySelector("#btn-sitrules");
     btnRules.addEventListener("click", (e) => {
@@ -148,24 +148,24 @@ function sittingRulesDialogOpen() {
 
     // build actual content
     let studentFrontLs = dialogNode.querySelector("#students-sitting-in-front");
-    firstRow.forEach(name => {
-        addSingleStudentToRuleList(name, studentFrontLs, firstRow);
+    firstRowRule.forEach(name => {
+        addSingleStudentToRuleList(name, studentFrontLs, firstRowRule);
     });
 
     let studentNotLastRowLs = dialogNode.querySelector("#students-not-sitting-in-back");
-    notLastRow.forEach(name => {
-        addSingleStudentToRuleList(name, studentNotLastRowLs, notLastRow);
+    notLastRowRule.forEach(name => {
+        addSingleStudentToRuleList(name, studentNotLastRowLs, notLastRowRule);
     })
 
     let ffront = dialogNode.querySelector("#add-student-front");
     ffront.addEventListener("submit", (e) => {
         e.preventDefault();
         let i = ffront.querySelector("input[name='student-name']");
-        if (!globalStudents.includes(i.value) || firstRow.includes(i.value)) {
+        if (!globalStudents.includes(i.value) || firstRowRule.includes(i.value)) {
             return;
         }
-        firstRow.push(i.value);
-        addSingleStudentToRuleList(i.value, studentFrontLs, firstRow);
+        firstRowRule.push(i.value);
+        addSingleStudentToRuleList(i.value, studentFrontLs, firstRowRule);
         updateRulesToStorage();
     })
 
@@ -173,11 +173,11 @@ function sittingRulesDialogOpen() {
     fnotBack.addEventListener("submit", (e) => {
         e.preventDefault();
         let i = fnotBack.querySelector("input[name='student-name']");
-        if (!globalStudents.includes(i.value) || notLastRow.includes(i.value)) {
+        if (!globalStudents.includes(i.value) || notLastRowRule.includes(i.value)) {
             return;
         }
-        notLastRow.push(i.value);
-        addSingleStudentToRuleList(i.value, studentNotLastRowLs, notLastRow);
+        notLastRowRule.push(i.value);
+        addSingleStudentToRuleList(i.value, studentNotLastRowLs, notLastRowRule);
         updateRulesToStorage();
     })
 
@@ -241,9 +241,9 @@ function addStudentCombo(listId) {
         let n1 = s1.value;
         let oldn1 = s1.dataset.oldvalue;
         let n2 = s2.value;
-        removeComboObject(oldn1, n2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+        removeComboObject(oldn1, n2, lst.dataset.object === "sitWith" ? sitWithRule : forbiddenNeighboursRule);
         if (globalStudents.includes(n1) && n2) {
-            addComboObject(n1, n2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+            addComboObject(n1, n2, lst.dataset.object === "sitWith" ? sitWithRule : forbiddenNeighboursRule);
         }
         s1.dataset.oldvalue = n1;
         updateRulesToStorage();
@@ -253,9 +253,9 @@ function addStudentCombo(listId) {
         let n1 = s1.value;
         let n2 = s2.value;
         let oldn2 = s2.dataset.oldvalue;
-        removeComboObject(n1, oldn2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+        removeComboObject(n1, oldn2, lst.dataset.object === "sitWith" ? sitWithRule : forbiddenNeighboursRule);
         if (globalStudents.includes(n2) && n1) {
-            addComboObject(n1, n2, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+            addComboObject(n1, n2, lst.dataset.object === "sitWith" ? sitWithRule : forbiddenNeighboursRule);
         }
         s2.dataset.oldvalue = n2;
         updateRulesToStorage();
@@ -263,7 +263,7 @@ function addStudentCombo(listId) {
 
     let li = frag.querySelector("li");
     frag.querySelector(".delete-button").addEventListener("click", (e) => {
-        removeComboObject(s1.value, s2.value, lst.dataset.object === "sitWith" ? sitWith : forbiddenNeighbours);
+        removeComboObject(s1.value, s2.value, lst.dataset.object === "sitWith" ? sitWithRule : forbiddenNeighboursRule);
         lst.removeChild(li);
     });
 
@@ -299,10 +299,10 @@ function addComboObject(name1, name2, obj) {
 }
 
 function loadRules(rules) {
-    sitWith = rules.sitWith ?? [];
-    forbiddenNeighbours = rules.forbiddenNeighbours ?? [];
-    firstRow = rules.firstRow ?? [];
-    notLastRow = rules.notLastRow ?? [];
+    sitWithRule = rules.sitWith ?? [];
+    forbiddenNeighboursRule = rules.forbiddenNeighbours ?? [];
+    firstRowRule = rules.firstRow ?? [];
+    notLastRowRule = rules.notLastRow ?? [];
 }
 
 window.addEventListener("keydown", (e) => {

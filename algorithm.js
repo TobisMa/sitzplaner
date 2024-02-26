@@ -20,12 +20,12 @@ async function generatePlan() {
 
     let dummyStudents = []
     globalStudents.forEach(name => {
-        dummyStudents.push(new DummyStudent(name, firstRow.includes(name), notLastRow.includes(name)));
+        dummyStudents.push(new DummyStudent(name, firstRowRule.includes(name), notLastRowRule.includes(name)));
     })
 
     dummyStudents.forEach(dummy => {
-        dummy.avoid = dummy.avoid.concat((forbiddenNeighbours[dummy.student] ?? []).map(name => getDummyStudentByName(dummyStudents, name)));
-        dummy.neighbour = dummy.neighbour.concat((sitWith[dummy.student] ?? []).map(name => getDummyStudentByName(dummyStudents, name)));
+        dummy.avoid = dummy.avoid.concat((forbiddenNeighboursRule[dummy.student] ?? []).map(name => getDummyStudentByName(dummyStudents, name)));
+        dummy.neighbour = dummy.neighbour.concat((sitWithRule[dummy.student] ?? []).map(name => getDummyStudentByName(dummyStudents, name)));
     });
 
     let algo = new SeatingAlgorithm(dummySeats, dummyStudents, randomness);
