@@ -1,4 +1,4 @@
-let draggedNode;
+let draggedNode = undefined;
 
 function dragOverRoom(e) {
     let td = e.target.offsetParent;
@@ -22,6 +22,7 @@ function dragOverList(e) {
 }
 
 function dragStartListItem(e) {
+    console.debug("start item dragging");
     let name = e.target.querySelector(".student-name").innerText;
     e.dataTransfer.setData("text/plain", name);
     draggedNode = e.target;
@@ -44,6 +45,7 @@ function dragStartTable(e) {
 }
 
 function dropOnTable(e) {
+    console.log("omy");
     if (draggingFile(e.dataTransfer)) {
         e.preventDefault();
         return;
@@ -99,4 +101,5 @@ function dropOnList(e) {
 
 window.addEventListener("dragend", e => {
     draggedNode?.classList.remove("dragged");
+    console.log("end", e.dataTransfer);
 });

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" async onerror="let el = document.querySelector('#export-image-container'); el.parentNode.removeChild(el); alert('Image export is disabled probably because of an internet error.\nFailed to load external dependency')"></script>
     <script src="storage.js"></script>
+    <!-- <script id="DragDropTouch" src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js" async></script> --><!-- does not work for me -->
+    <script src="mobile_simulation.js"></script>
     <script src="settings.js"></script>
     <script src="student.js"></script>
     <script src="room.js"></script>
@@ -30,7 +32,7 @@
             </li>
         </template>
         <template id="templ-room-table">
-            <td class="table" ondragover="dragOverRoom(event)" ondragenter="dragOverRoom(event)" ondrop="dropOnTable(event)" data-dragitem="student-table">
+            <td class="table" ondragover="dragOverRoom(event)" ondragenter="dragOverRoom(event)" ondrop="console.log(event.target); dropOnTable(event)" data-dragitem="student-table">
                 <div draggable="true" class="student-table" ondragstart="dragStartTable(event)">
                     <span class="student-name"></span>
                 </div>
