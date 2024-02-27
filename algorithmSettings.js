@@ -338,6 +338,7 @@ function loadRules(rules) {
     forbiddenNeighboursRule = rules.forbiddenNeighbours ?? {};
     firstRowRule = rules.firstRow ?? [];
     notLastRowRule = rules.notLastRow ?? [];
+    updateRulesToStorage();
 }
 
 window.addEventListener("keydown", (e) => {

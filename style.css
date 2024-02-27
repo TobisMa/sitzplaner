@@ -270,6 +270,7 @@ button {
     height: 100%;
     font-size: 1.5em;
     background-color: #e9e9ed;
+    white-space: nowrap;
 }
 
 #presets .preset:nth-child(2n) {
