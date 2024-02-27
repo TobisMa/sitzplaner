@@ -11,6 +11,16 @@ function openSettings() {
     settingModal.showModal();
 }
 
+function closeDialog(e) { 
+    console.log(e);
+    if (e.target.tagName != "DIALOG") {
+        return;
+    }
+    if (e.clientX < e.target.offsetLeft || e.clientX > e.target.offsetLeft + e.target.offsetWidth || e.clientY < e.target.offsetTop || e.clientY > e.target.offsetTop + e.target.offsetHeight) {
+        e.target.close();
+    }
+}
+
 window.addEventListener("DOMContentLoaded", (e) => {
     settingModal = document.getElementById("settings-dialog");
     setting_defaultExport = loadFromStorage(KEY_SETTING_DEFAULT_EXPORT, "splan");
@@ -42,5 +52,4 @@ window.addEventListener("DOMContentLoaded", (e) => {
         }
         saveToStorage(KEY_SETTING_ALOG_RANDOMNESS, setting_algo_randomness);
     })
-
 })

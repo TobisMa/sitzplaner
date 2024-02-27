@@ -57,8 +57,9 @@
             </div>
         </template>
         <template id="templ-rules-dialog">
-            <dialog id="sitting-rules">
+            <dialog id="sitting-rules" onclick="closeDialog(event)">
                 <h2>Sitzregeln</h2>
+                <p><i>Beim Verschieben werden diese Regeln nicht beachtet.<br>Die Regeln existieren nur für den Algorithmus beim Generieren.</i></p>
                 <details>
                     <summary>Soll vorne sitzen</summary>
                     <ul id="students-sitting-in-front">
@@ -184,8 +185,8 @@
             </div>
         </section>
         <div class="setting-container">
-            <dialog id="settings-dialog">
-                <section id="export">
+            <dialog id="settings-dialog" onclick="closeDialog(event)">
+                <section id="isection-setting-export">
                     <h2>Export</h2>
                     <div class="setting-container">
                         <label for="setting-default-export">Format, wenn auf "Export" gedrückt wird</label>
@@ -203,7 +204,7 @@
                     </div>
                 </section>
                 <hr>
-                <section id="Algorithm">
+                <section id="section-setting-algorithm-settings">
                     <h2>Algorithmus</h2>
                     <div class="setting-container">
                         <label for="setting-algo-randomness">Algorithmuszufallsbalance</label>
@@ -215,7 +216,11 @@
                         </select>
                     </div>
                 </section>
-                <hr>
+                <hr> 
+                <section id="">
+                    <h2>Datenspeicherung</h2>
+                    <button onclick="clearStorage(event)">Lösche gespeicherte Daten</button>
+                </section>
                 <section id="settings-close-button">
                     <button onclick="document.querySelector('#settings-dialog').close()">Schlie&szlig;en</button>
                 </section>
