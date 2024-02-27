@@ -28,7 +28,6 @@
     height: calc(100% - 50px - 50px);   /* 50px top (sliders); 50px bottom (presets) */
     display: flex;
     align-items: center;
-    justify-content: space-around;
     overflow: auto;
     flex-flow: column nowrap;
 }
@@ -42,7 +41,7 @@
     line-height: 1;
     text-align: center;
     padding: 2em 0;
-    margin: unset auto;
+    margin: auto auto;
     position: sticky;
     left: 0;
 }
@@ -75,7 +74,8 @@
     height: fit-content;
     height: -moz-available;
     margin: 0 auto;
-
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #room-table tr {
