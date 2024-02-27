@@ -1,7 +1,5 @@
 const presets = {
     empty: {
-        width: 12,
-        height: 12,
         room: {}
     },
     "frontal": {
@@ -123,13 +121,32 @@ function loadTablePreset(name) {
         return;
     }
     let p = JSON.parse(JSON.stringify(presets[name]));
-    loadRoom(p.room, p.width, p.height, false);
+    loadRoom(p.room, p.width ?? roomWidth, p.height ?? roomHeight, false);
 }
 
 
 window.addEventListener("DOMContentLoaded", (e) => {
     document.querySelectorAll("#presets .preset").forEach(container => {
+        if (container.dataset.presetname === "reset") {
+            container.addEventListener("click", e => {
+                let answer = confirm("Alle Schüler aus den Tischen entfernen?");
+                if (!answer) {
+                    return;
+                }
+                let newRoom = {};
+                for (const key of Object.keys(roomStudents)) {
+                    newRoom[key] = "";
+                }
+                loadRoom(newRoom, roomWidth, roomHeight);
+            });
+            return;
+        }
         container.addEventListener("click", (e) => {
+            if (container.classList.contains("reset")) {
+                if (!confirm(container.dataset.resetmsg || "Sind sie sicher, dass sie diese Aktion durchführen wollen?")) {
+                    return;
+                }
+            }
             loadTablePreset(e.target.dataset.presetname);
         });
     });

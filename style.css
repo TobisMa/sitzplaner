@@ -280,6 +280,18 @@ button {
     background-color: #9b9b9b;
 }
 
+#presets .preset.reset {
+    background-color: red;
+}
+
+#presets .preset.reset:hover {
+    background-color: rgb(255, 67, 67);
+}
+
+#presets .preset.reset + .preset.reset {
+    border-left: 1px solid black;
+} 
+
 #student-contextmenu {
     position: fixed;
     background-color: white;
