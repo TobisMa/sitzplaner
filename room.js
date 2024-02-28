@@ -2,6 +2,9 @@ const KEY_ROOM_WIDTH = "room_width";
 const KEY_ROOM_HEIGHT = "room_height";
 const KEY_ROOM = "room";
 
+const MAX_ROOMWIDTH = 15;
+const MAX_ROOMHEIGHT = 15;
+
 let sliderHorizontal;
 let sliderVertical;
 let roomTables;
@@ -41,18 +44,18 @@ function loadRoom(room, width, height, reset) {
 }
 
 function updateSliders(width, height) {
-        let w = width ?? 11;
+        let w = width ?? MAX_ROOMWIDTH;
         let num = parseInt(w);
         if (num === NaN) {
-            w = 11;
+            w = MAX_ROOMWIDTH;
         }
         sliderHorizontal.value = w;
         sliderHorizontal.dispatchEvent(new Event("change"));
         
-        let h = height ?? 11;
+        let h = height ?? MAX_ROOMHEIGHT;
         num = parseInt(h);
         if (num === NaN) {
-            h = 11;
+            h = MAX_ROOMHEIGHT;
         }
         sliderVertical.value = h;
         sliderVertical.dispatchEvent(new Event("change"));

@@ -26,6 +26,7 @@
 #room {
     width: 100%;
     height: calc(100% - 50px - 50px);   /* 50px top (sliders); 50px bottom (presets) */
+    padding-bottom: 10px;
     display: flex;
     align-items: center;
     overflow: auto;
