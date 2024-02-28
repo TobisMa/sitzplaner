@@ -101,15 +101,19 @@ function getStudentHTML(x, y) {
     let td = studentTable.querySelector("td.table");
     td.dataset.x = x;
     td.dataset.y = y;
+
     td.addEventListener("click", (e) => {
         let span = td.querySelector("span.student-name");
+        let hadStudent = false;
         if (span.classList.contains("has-student")) {
             let name = span.innerText;
             span.innerText = "";
             removeStudentFromRoom(name);
             span.classList.remove("has-student");
+            hadStudent = true;
         }
-        if (td.classList.contains("is-table")) {
+        console.log(hadStudent, setting_delete_table_on_click, DELETE_TABLE_ON_CLICK)
+        if (td.classList.contains("is-table") && (setting_delete_table_on_click === DELETE_TABLE_ON_CLICK || !hadStudent)) {
             td.classList.remove("is-table");
             delete roomStudents[[x, y]];
         }

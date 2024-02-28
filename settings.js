@@ -1,11 +1,16 @@
 const KEY_SETTING_DEFAULT_EXPORT = "setting-default-export";
 const KEY_SETTING_IMAGE_EXPORT_FORMAT = "setting-image-format";
 const KEY_SETTING_ALOG_RANDOMNESS = "setting-algo-randomness";
+const KEY_DELETE_TABLE_ON_CLICK = "setting-delete-table-on-click";
+
+const DELETE_TABLE_ON_CLICK = 0;
+const KEEP_TABLE_ON_CLICK = 1;
 
 let settingModal;
-let setting_defaultExport;
-let setting_imageExportFormat;
-let setting_algo_randomness;
+let setting_defaultExport = "splan";
+let setting_imageExportFormat = "image/png";
+let setting_algo_randomness = 2;
+let setting_delete_table_on_click = 1;
 
 function openSettings() {
     settingModal.showModal();
@@ -26,6 +31,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     setting_defaultExport = loadFromStorage(KEY_SETTING_DEFAULT_EXPORT, "splan");
     setting_imageExportFormat = loadFromStorage(KEY_SETTING_IMAGE_EXPORT_FORMAT, "image/png");
     setting_algo_randomness = loadFromStorage(KEY_SETTING_ALOG_RANDOMNESS, 2);
+    setting_delete_table_on_click = loadFromStorage(KEY_DELETE_TABLE_ON_CLICK, 1);
 
     let defaultExport = settingModal.querySelector("#setting-default-export");
     defaultExport.value = setting_defaultExport;
@@ -44,7 +50,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let algo_randomness = settingModal.querySelector("#setting-algo-randomness");
     algo_randomness.value = setting_algo_randomness;
     algo_randomness.addEventListener("change", (e) => {
-        console.log("chnage");
         setting_algo_randomness = parseInt(algo_randomness.value);
         if (isNaN(setting_algo_randomness)) {
             algo_randomness.value = 2;
@@ -52,4 +57,15 @@ window.addEventListener("DOMContentLoaded", (e) => {
         }
         saveToStorage(KEY_SETTING_ALOG_RANDOMNESS, setting_algo_randomness);
     })
+
+    let tableBehaviour = document.getElementById("setting-delete-table-on-click");
+    tableBehaviour.value = setting_delete_table_on_click;
+    tableBehaviour.addEventListener("change", (e) => {
+        setting_delete_table_on_click = parseInt(tableBehaviour.value);
+        if (isNaN(setting_delete_table_on_click)) {
+            tableBehaviour.value = 1;
+            setting_delete_table_on_click = 1;
+        }
+        saveToStorage(KEY_DELETE_TABLE_ON_CLICK, setting_delete_table_on_click);
+    });
 })
