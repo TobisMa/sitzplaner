@@ -52,6 +52,7 @@
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
+    border-bottom: 3px solid black;
 }
 
 #sliders > div {
@@ -76,6 +77,7 @@
     margin: 0 auto;
     margin-top: auto;
     margin-bottom: auto;
+    padding: 15px;
 }
 
 #room-table tr {
