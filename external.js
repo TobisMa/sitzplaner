@@ -35,13 +35,10 @@ function exportData(e) {
     window.URL.revokeObjectURL(url);
 }
 
-
 function importData(data, filetyp) {
-    while (studentListNode.firstElementChild !== studentListNode.lastElementChild) {
-        studentListNode.removeChild(studentListNode.firstChild);
-    }
     
     if (typeof data === "object") {
+        removeStudentsFromList();
         globalStudents = data.students ?? [];
 
         globalStudents.forEach(addStudentHTML);  // make room removes again
@@ -67,26 +64,45 @@ function importData(data, filetyp) {
             alert("Canceled");
             return;
         }
+        removeStudentsFromList();
 
         globalStudents = students;
         globalStudents.forEach(addStudentHTML);
         saveToStorage(KEY_STUDENT, globalStudents);
 
-        loadRoom({}, roomWidth, roomHeight, true);
+        let newRoom = {};
+        for (const key of Object.keys(roomStudents)) {
+          newRoom[key] = "";
+        }
+        loadRoom(newRoom, roomWidth, roomHeight, true);
     }
     else if (typeof data === "string") {
         let lines = data.split("\n").map(value => value.trimEnd("\r"));
+        let names = [];
+        for (let name of lines) {
+            console.log(name);
+            if (!names.includes(name)) {
+                console.debug("Filter");
+                names.push(name);
+            }
+        }
         let answer = confirm("Import following students (and so on if there are more)?:\n" + lines.slice(0, 5).join("\n") + "\n...");
         if (!answer) {
             alert("Canceled");
             return;
         }
 
-        globalStudents = lines.filter(line => line);
+        removeStudentsFromList();
+
+        globalStudents = names.filter(name => name);
         globalStudents.forEach(addStudentHTML);
         saveToStorage(KEY_STUDENT, globalStudents);
         
-        loadRoom({}, roomWidth, roomHeight, true);
+        let newRoom = {};
+        for (const key of Object.keys(roomStudents)) {
+            newRoom[key] = "";
+        }
+        loadRoom(newRoom, roomWidth, roomHeight, true);
     }  
 }
 

@@ -12,6 +12,12 @@ function buildList() {
     globalStudents.forEach(addStudentHTML);
 }
 
+function removeStudentsFromList() {
+    while (studentListNode.firstElementChild !== studentListNode.lastElementChild) {
+        studentListNode.removeChild(studentListNode.firstChild);
+    }
+}
+
 function addStudentHTML(name) {
     if (name) {
         let studentNode = template_studentListItem.content.cloneNode(true);
