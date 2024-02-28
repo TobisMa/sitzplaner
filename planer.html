@@ -118,7 +118,7 @@
         </template>
     </div> 
     <main id="content">
-        <section id="sidebar">
+        <section id="sidebar" ondragover="dragOverList(event)" ondragenter="dragOverList(event)" ondrop="dropOnList(event)">
             <h2>Sch&uuml;ler</h2>
             <div class="student-list-actions">
                 <button id="student-list-import">Import</button>
@@ -139,7 +139,7 @@
                     </div>
                 </li>
             </ul>
-            <ul id="student-list" ondragover="dragOverList(event)" ondragenter="dragOverList(event)" ondrop="dropOnList(event)">
+            <ul id="student-list">
                 <li id="new-student-li">
                     <form id="student-list-add-form">
                         <input type="text" name="student-add-input" id="student-add-input" placeholder="Schülername" required autocomplete="name" />
