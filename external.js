@@ -54,7 +54,7 @@ function importData(data, filetyp) {
             .filter(line => line)
             .map(line => line.split(CSV_DELIMITER))  // convert lines to values
             .map(values => [values[1], values[2]])       // convert values to names
-            .map(names => names.map(name => name.trim("\"")))  // remove possible "
+            .map(names => names.map(name => name.replace(/\"/g, "")))  // remove possible "
             .map(names => names.join(", "));        // make it to one string
         
         console.log(students);
