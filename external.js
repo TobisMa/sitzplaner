@@ -49,15 +49,50 @@ function importData(data, filetyp) {
         loadRules(data.rules ?? {});
     }
     else if (typeof data === "string" && filetyp === "csv") {
-        let lines = data.split("\n").slice(1);
-        let students = lines
-            .filter(line => line)
+        let lines = data.split("\n").slice(2);
+        lines = lines
+            .filter(line => line.trim().length >= 1)
             .map(line => line.split(CSV_DELIMITER))  // convert lines to values
-            .map(values => [values[1], values[2]])       // convert values to names
-            .map(names => names.map(name => name.replace(/\"/g, "")))  // remove possible "
-            .map(names => names.join(", "));        // make it to one string
+            .map(values => [values[2], values[1]])      // convert values to names
+            .map(names => names.map(name => name.replace(/\"/g, "")));  // remove possible "
         
-        console.log(students);
+        let firstNames = lines.map(names => names[0]);
+        let students = [];
+        let suffixLength = {};
+        let doubleName = {};
+        let addLastName = [];
+        
+        while (firstNames.length) {
+            let [name] = firstNames.splice(0, 1);
+            let suffix;
+            if (firstNames.includes(name) || addLastName.includes(name)) {
+                if (!addLastName.includes(name)) {
+                    addLastName.push(name);
+                    doubleName[name] = 0;
+                }
+                suffixLength[name] = 0;
+                let lastNames = lines.filter(values => values[0] === name).map(values => values[1]);
+                let suffixes;
+                let longestLastName = Math.max(...lastNames.map(name => name.length));
+
+                do {
+                    suffixLength[name]++;
+                    suffixes = lastNames.map(n => n.slice(0, suffixLength[name]));
+                }
+                while (suffixLength[name] < longestLastName && new Set(suffixes).size < suffixes.length);
+
+                let suffixOpts = lines.filter(values => values[0] === name).map(values => values[1].slice(0, suffixLength[name]));
+                suffix = suffixOpts[doubleName[name]];
+                doubleName[name]++;
+            }
+
+            if (suffixLength[name] !== undefined) {
+                students.push(name.concat(" ", suffix, "."));
+            }
+            else {
+                students.push(name);
+            }
+        }
         
         let answer = confirm("Import following students (and so on if there are more)?:\n" + students.slice(0, 5).join("\n") + "\n...");
         if (!answer) {
