@@ -23,7 +23,6 @@
     <title>Sitzplaner</title>
 </head>
 <body>
-    <div id="print-title"></div>
     <div id="template-container">
         <template id="templ-student-list-item">
             <li title="Drag onto a blue field (table)" draggable="true" ondragstart="dragStartListItem(event)" data-dragitem="student-li" oncontextmenu="studentContextmenu(event)">
@@ -125,6 +124,7 @@
         You don't need to worry. The only external links called by this page are self-written script files (which don't request external resources), stylesheets and htmltocanvas for image support. 
     </noscript>
     <main id="content">
+        <div id="print-title"></div>
         <section id="sidebar" ondragover="dragOverList(event)" ondragenter="dragOverList(event)" ondrop="dropOnList(event)">
             <h2>Sch&uuml;ler</h2>
             <div class="student-list-actions">

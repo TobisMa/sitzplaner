@@ -3,18 +3,19 @@ const CSV_DELIMITER = ";";
 
 
 function exportData(e) {
-    let filename = prompt("Filename:", loadFromStorage(KEY_LAST_FILENAME, "sitzplan.splan"));
+    let filename = prompt("Filename:", loadFromStorage(KEY_LAST_FILENAME, setting_defaultExport === "image" ? "sitzplan.png" : "sitzplan.splan"));
     if (!filename) {
         console.debug("Canceled by user");
         return;
     }
-    filename = ensureFileEnding(filename, ".splan");
-    saveToStorage(KEY_LAST_FILENAME, filename)
 
     if (setting_defaultExport === "image") {
         exportImage(e, filename);
         return;
     }
+
+    filename = ensureFileEnding(filename, ".splan");
+    saveToStorage(KEY_LAST_FILENAME, filename)
 
     const content = JSON.stringify({
         students: globalStudents,

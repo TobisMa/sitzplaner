@@ -1,11 +1,16 @@
+:root {
+    --page-offsetX: 1.6cm;
+}
+
 @page {
     margin: 0;
 }
 
 #print-title {
-    position: absolute;
+    position: fixed;
     top: .5in;
-    left: 1in;
+    width: calc(100% - var(--page-offsetX) - var(--page-offsetX));
+    text-align: center;
     display: block;
 }
 
@@ -57,7 +62,7 @@
 }
 
 body {
-    margin: 0 1.6cm;
+    margin: 0 var(--page-offsetX);
 }
 
 #pult {
