@@ -2,6 +2,13 @@
     margin: 0;
 }
 
+#print-title {
+    position: absolute;
+    top: .5in;
+    left: 1in;
+    display: block;
+}
+
 #sidebar, #presets, #sliders {
     display: none
 }

@@ -1,4 +1,8 @@
 
+#print-title {
+    display: none;
+}
+
 #sidebar {
     position: fixed;
     width: clamp(150px, 20%, 500px);
