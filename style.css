@@ -96,6 +96,7 @@
     border-collapse: collapse;
     width: min-content;
     overflow-wrap: anywhere;
+    user-select: none;
 }
 
 #room-table .table .student-table {
