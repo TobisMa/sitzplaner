@@ -1,3 +1,8 @@
+:root {
+    --sidebar-width: clamp(150px, 20%, 500px);
+    --height-top-bar: 50px;
+    --height-bottom-bar: 50px;
+}
 
 #print-title {
     display: none;
@@ -5,7 +10,8 @@
 
 #sidebar {
     position: fixed;
-    width: clamp(150px, 20%, 500px);
+    width: var(--sidebar-width);
+    width: calc(var(--sidebar-width) + 3px);
     height: 100%;
     border-right: 3px solid black;
     left: 0;
@@ -20,7 +26,8 @@
 
 #tables {
     position: absolute;
-    left: clamp(150px, 20%, 500px);
+    left: var(--sidebar-width);
+    left: calc(var(--sidebar-width) + 3px);
     width: fit-content;
     width: -webkit-fill-available;
     width: -moz-available;
@@ -29,7 +36,7 @@
 
 #room {
     width: 100%;
-    height: calc(100% - 50px - 50px);   /* 50px top (sliders); 50px bottom (presets) */
+    height: calc(100% - var(--height-top-bar) - var(--height-bottom-bar));   /* 50px top (sliders); 50px bottom (presets) */
     padding-bottom: 10px;
     display: flex;
     align-items: center;
@@ -52,7 +59,7 @@
 }
 
 #sliders {
-    height: 50px;
+    height: var(--height-top-bar);
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
@@ -213,6 +220,14 @@
     line-height: 1;
 }
 
+.dragged {
+    min-width: 100%;
+    width: min-content;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    -ms-word-break: keep-all;
+}
+
 .dragged .student-actions {
     display: none;
 }
@@ -266,7 +281,7 @@ button {
 
 #presets {
     position: absolute;
-    height: 50px;
+    height: var(--height-bottom-bar);
     bottom: 0;
     display: flex;
     justify-content: space-evenly;
@@ -295,6 +310,7 @@ button {
 
 #presets .preset.reset {
     background-color: red;
+    color: #eee;
 }
 
 #presets .preset.reset:hover {
