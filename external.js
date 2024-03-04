@@ -22,6 +22,7 @@ function exportData(e) {
         room: roomStudents,
         width: roomWidth,
         height: roomHeight,
+        title: printTitle
     });
     let f = new File([content], filename, {type: "text/json"});
     
@@ -37,7 +38,7 @@ function exportData(e) {
 }
 
 function importData(data, filetyp) {
-    
+    let title = "";
     if (typeof data === "object") {
         removeStudentsFromList();
         globalStudents = data.students ?? [];
@@ -48,12 +49,20 @@ function importData(data, filetyp) {
         loadRoom(data.room ?? {}, data.width, data.height, true);
 
         loadRules(data.rules ?? {});
+
+        title = data.title ?? "";
     }
     else if (typeof data === "string" && filetyp === "csv") {
-        let lines = data.split("\n").slice(2);
-        lines = lines
+        let del = CSV_DELIMITER;
+        if ([',', ';', ':'].includes(data.charAt(0))) {
+            del = data[0];
+        }
+
+        let lines = data.split("\n");
+        [title] = lines[0].split(del).filter(line => line.trim().length != 0);
+        lines = lines.slice(2)
             .filter(line => line.trim().length >= 1)
-            .map(line => line.split(CSV_DELIMITER))  // convert lines to values
+            .map(line => line.split(del))  // convert lines to values
             .map(values => [values[2], values[1]])      // convert values to names
             .map(names => names.map(name => name.replace(/\"/g, "")));  // remove possible "
         
@@ -140,6 +149,7 @@ function importData(data, filetyp) {
         }
         loadRoom(newRoom, roomWidth, roomHeight, true);
     }  
+    setPrintTitle(title);
 }
 
 function importDataHandler(e) {
