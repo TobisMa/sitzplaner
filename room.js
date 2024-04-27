@@ -1,6 +1,3 @@
-const KEY_ROOM_WIDTH = "room_width";
-const KEY_ROOM_HEIGHT = "room_height";
-const KEY_ROOM = "room";
 
 const MAX_ROOMWIDTH = 15;
 const MAX_ROOMHEIGHT = 15;

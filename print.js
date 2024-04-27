@@ -1,4 +1,3 @@
-const KEY_PRINT_TITLE = "print_title"
 let printTitle = "";
 let titleHTML;
 

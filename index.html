@@ -3,14 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect to actual page (for now at least idk)</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <script src="storage.js"></script>
+    <script src="classes.js"></script>
+    <script src="classEditing.js"></script>
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="classes.css" />
+    <script>
+        sessionStorage.clear();
+    </script>
+    <title>Klassen- und Kurs&uuml;bersicht</title>
 </head>
 <body>
-    <noscript>
-        Click <a href="/planer.html">here</a> to get to the page.
-    </noscript>
+    <div id="template-container">
+        <template id="templ-class-container">
+            <div class="class-container">
+                <div class="class-name"></div>
+                <div class="class-actions">
+                    <button type="button" class="edit">Umbenennen</button> 
+                    <button type="button" class="delete">L&ouml;schen</button>
+                </div>
+            </div>
+        </template>
+    </div>
+    <nav>
+        <h1>Klassen und Kurse</h1>
+    </nav>
+    <main id="content">
+        <div id="class-add-container">
+            <form onsubmit="addClassHandler(event)" autocomplete="off">
+                <input type="text" name="class-name" placeholder="Klassen- oder Kursname" value autocomplete="off" />
+                <button type="button" class="add" onclick="addClassHandler(event)">Erstellen</button>
+            </form>
+        </div>
+        <div id="class-list-container">
+        </div>
+    </main>
     <script>
-        window.location.replace("https://tobisma.github.io/sitzplaner/planer.html");
+        function cleanDOM(node) {
+            for (let n = 0; n < node.childNodes.length; n++) {
+                let child = node.childNodes[n];
+                if (child.nodeType === 3 && !/\S/.test(child.nodeValue)) {
+                    node.removeChild(child);
+                    n--;
+                }
+                else if (child.nodeType === 1) {
+                    cleanDOM(child);
+                }
+            }
+        }
+        window.addEventListener("DOMContentLoaded", e => cleanDOM(document.body));
     </script>
 </body>
 </html>

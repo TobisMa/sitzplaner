@@ -189,7 +189,7 @@
 }
 
 #student-list .student-delete:hover {
-    background-color: rgb(255, 92, 92);
+    background-color: #ff5c5c;
 }
 
 #student-list li:last-child {

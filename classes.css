@@ -1,0 +1,83 @@
+:root {
+    --nav-size: 50px;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+}
+
+nav {
+    height: var(--nav-size);
+    background-color: #fff;
+    border-bottom: 3px solid black;
+    position: sticky;
+    top: 0;
+}
+
+#class-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: 1fr;
+    grid-gap: 1em;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.class-container {
+    border: 2px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    flex-flow: column nowrap;
+    transition: all 100ms ease-in-out;
+}
+
+.class-container:hover {
+    background-color: #eee;
+    box-shadow: 2px 1px 5px gray;
+}
+
+.class-container .class-name {
+    padding: .4em 2ch;
+    overflow-wrap: anywhere;
+    white-space: wrap;
+    margin: auto 0;
+}
+
+.class-container .class-actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-top: 1px solid black;
+}
+
+.class-container .class-actions button {
+    display: inline-block;
+    border: none;
+    border-radius: 0;
+    width: 50%;
+    padding: .3em 0;
+    cursor: pointer;
+}
+
+.class-container .class-actions button.edit {
+    background-color: #55d355;
+}
+
+.class-container .class-actions button.edit:hover {
+    background-color: #90ee90;
+}
+
+.class-container .class-actions button.delete {
+    color: white;
+    background-color: #ff0000;
+}
+
+.class-container .class-actions button.delete:hover { 
+    background-color: #ff5c5c;
+}
+
+@media screen and (min-width: 600px) {
+}
