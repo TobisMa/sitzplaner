@@ -1,4 +1,3 @@
-const KEY_LAST_FILENAME = "last_filename_export";
 const CSV_DELIMITER = ";";
 
 

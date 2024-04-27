@@ -9,7 +9,6 @@ let firstRowRule = [];
 let notLastRowRule = [];
 let contextMenuOpen = false;
 
-const KEY_RULES = "rules";
 
 function updateRulesToStorage() {
     saveToStorage(KEY_RULES, {

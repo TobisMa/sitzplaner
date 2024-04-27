@@ -1,4 +1,3 @@
-const KEY_STUDENT = "students";
 let studentListNode;
 let template_studentListItem;
 
