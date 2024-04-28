@@ -194,6 +194,7 @@ function updateRoom() {
 
     roomWidth = nw;
     roomHeight = nh;
+    tableSizing();
 }
 
 function loaded(e) {

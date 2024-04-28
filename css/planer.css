@@ -96,6 +96,11 @@
     padding: 15px;
 }
 
+#room-table.no-scroll {
+    width: 100%;
+    table-layout: fixed;
+}
+
 #room-table tr {
     height: 100%;
 }
@@ -110,12 +115,23 @@
     user-select: none;
 }
 
+#room-table.no-scroll .table {
+    min-width: unset;
+    min-height: unset !important;
+    width: unset;
+}
+
 #room-table .table .student-table {
     min-height: 5em;
     display: flex;
     align-items: center;
     align-content: center;
     cursor: pointer;
+}
+
+#room-table.no-scroll .table .student-table {
+    min-height: unset !important;
+    height: 100%;
 }
 
 #room-table .table.is-table .student-table {

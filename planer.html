@@ -9,14 +9,14 @@
     <script src="js/storage.js"></script>
     <!-- <script id="DragDropTouch" src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js" async></script> --><!-- does not work for me -->
     <script src="js/mobile_simulation.js"></script>
-    <script src="js/settings.js"></script>
+    <script src="js/settings.js" defer></script>
     <script src="js/print.js"></script>
     <script src="js/planer/student.js"></script>
     <script src="js/planer/room.js"></script>
     <script src="js/planer/dragDrop.js"></script>
     <script src="js/planer/preset.js"></script>
-    <script src="js/planer/algorithmSettings.js"></script>
-    <script src="js/planer/algorithm.js"></script>
+    <script src="js/planer/algorithmSettings.js" defer></script>
+    <script src="js/planer/algorithm.js" defer></script>
     <script src="js/planer/external.js"></script>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/planer.css">
@@ -131,11 +131,11 @@
             <div class="student-list-actions">
                 <button id="student-list-import">Import</button>
                 <button id="student-list-export">Export</button>
-                <!-- <button id="student-list-clear">L&ouml;sche Alle</button> -->
+                <button id="image-export">Image</button>
             </div>
             <ul id="general-actions-list">
                 <li class="general-action" id="export-image-container">
-                    <button onclick="exportImage(event)">Export Image</button>
+                    <button onclick="emptyPlan(event)">Neuer Plan</button>
                 </li>
                 <li class="general-action">
                     <button onclick="openSettings(event)">Einstellungen</button>
@@ -223,6 +223,13 @@
                         <select id="setting-delete-table-on-click">
                             <option value="0">Tisch entfernen & Sch&uuml;ler an die Seite</option>
                             <option value="1">Nur Schüler entfernen</option>
+                        </select>
+                    </div>
+                    <div class="setting-container">
+                        <label for="setting-scrollbar-behaviour">Wie die Tische sich in ihrer Gr&ouml;ße Verhalten</label>
+                        <select id="setting-scrollbar-behaviour">
+                            <option value="0">Tische herunterskalieren, damit immer alle zu sehen sind</option>
+                            <option value="1">Scrollbalken einf&uuml;hren, aber Tische enthalten erhalten eine Mindesbreite</option>
                         </select>
                     </div>
                 </section>

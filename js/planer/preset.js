@@ -115,6 +115,13 @@ const presets = {
 }
 
 
+function emptyPlan(event) {
+    let answer = window.confirm("Dies wird alle Tische entfernen und Schüler zurück in die Seitenleiste bewegen");
+    if (!answer) return;
+    loadTablePreset("empty");
+}
+
+
 function loadTablePreset(name) {
     if (!presets[name]) {
         console.debug("Preset name not found:", name);
