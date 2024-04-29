@@ -65,6 +65,7 @@ function makeRoom() {
     for (let h = 0; h < roomHeight; h++) {
         roomAddRow();
     }
+    tableSizing();
 }
 
 function dimensionUpdate(visualisation, storageKey) {

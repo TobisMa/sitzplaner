@@ -29,12 +29,15 @@ function closeDialog(e) {
 }
 
 function tableSizing() {
-    if (setting_scrollbar_behaviour === 0) {
         console.debug("adjust tables");
         for (table of document.querySelectorAll("#room-table .table")) {
-            table.style.height = (document.body.clientHeight - 260) / roomHeight + "px"; 
+            if (setting_scrollbar_behaviour === 0) {
+                table.style.height = (document.body.clientHeight - 260) / roomHeight + "px"; 
+            }
+            else {
+                table.style.removeProperty("height");
+            }
         }
-    }
 }
 
 window.addEventListener("DOMContentLoaded", (e) => {
@@ -92,17 +95,17 @@ window.addEventListener("DOMContentLoaded", (e) => {
         console.debug("hello");
         if (setting_scrollbar_behaviour === 0) {
             document.getElementById("room-table").classList.add("no-scroll");
-            tableSizing();
         } else {
             document.getElementById("room-table").classList.remove("no-scroll");
         }
+        tableSizing();
         saveToStorage(KEY_SCROLLBAR_BEHAVIOUR, setting_scrollbar_behaviour);
     })
 
     if (setting_scrollbar_behaviour === 0) {
         document.getElementById("room-table").classList.add("no-scroll");
-        tableSizing();
     }
+    tableSizing();
 })
 
 window.addEventListener("resize", (e) => { tableSizing(); });
