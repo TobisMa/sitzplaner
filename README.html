@@ -379,6 +379,14 @@ code {
 <li>Dateien drag and drop</li>
 <li>Druckansicht</li>
 </ul>
+<h2 id="run-in-docker">Run in docker</h2>
+<ol>
+<li>Download the source using <code>git clone</code> or github's ZIP-folder</li>
+<li>Go into the source folder (extract ZIP-folder first)</li>
+<li>Build the docker image: <code>docker build -t sitzplaner:v1 .</code> (the dot at the end is important)</li>
+<li>Run the docker image: <code>docker run --name sitzplaner -d -p 8000:80 sitzplaner:v1</code></li>
+<li>Go into the browser onto <code>127.0.0.1:8000</code> and use it.</li>
+</ol>
 
 </body>
 </html>
