@@ -1,15 +1,16 @@
 const CSV_DELIMITER = ";";
 
 
+function createHeaderName(filler = "_") {
+    let d = new Date(Date.now());
+    base = className ?? "";
+    return "Sitzplan" + filler + `${base !== "" ? base + filler : ""}${d.getDay()}` + filler + `${d.toLocaleString("default", {month: "long"})}` + filler + `${d.getFullYear()}`;
+}
+
 function exportData(e) {
-    let filename = prompt("Filename:", loadFromStorage(KEY_LAST_FILENAME, setting_defaultExport === "image" ? "sitzplan.png" : "sitzplan.splan"));
+    let filename = prompt("Filename:", createHeaderName());
     if (!filename) {
         console.debug("Canceled by user");
-        return;
-    }
-
-    if (setting_defaultExport === "image") {
-        exportImage(e, filename);
         return;
     }
 
@@ -225,19 +226,30 @@ function handleDrop(e) {
     fileReader.onloadend = (e) => { readFileImport(fileReader, getFileExtension(file.name)); };
 }
 
-function exportImage(e, filename) {
-    filename = filename || "Stundenplan";
+function exportImage(e) {
+    let filename = window.prompt("Filename:", createHeaderName());
+    filename = ensureFileEnding(filename, "." + setting_imageExportFormat.split("/").slice(1));
+
     let container = document.querySelector("#room");
-    let rw = document.querySelector("#room-table").clientWidth;
-    let rh = document.querySelector("#room").clientHeight;
+    let rw = document.querySelector("#room-table").scrollWidth + 100;
+    let rh = document.querySelector("#room").scrollHeight;
+    let sidebarW = parseInt(getComputedStyle(container).getPropertyValue('--sidebar-max-width'));
+    console.debug(rw, rh)
+    console.debug(rw + sidebarW);
+
     html2canvas(container, {
         width: rw,
         height: rh,
-        windowWidth: rw + document.querySelector("#sidebar").clientWidth + 10,
-        windowHeight: rh
+        windowWidth: rw + sidebarW,
+        windowHeight: rh,
+        onclone: (clonedDoc) => {
+            clonedDoc.querySelector("#print-title").classList.add("html2canvas"); 
+        },
+        x: -20,
+        y: -30
     }).then((canvas) => {
         let link = document.createElement('a');
-        link.download = setting_imageExportFormat === "image/png" ? ensureFileEnding(filename, ".png") : ensureFileEnding(filename, ".jpeg");
+        link.download = filename
         console.debug(link.download);
         console.debug(setting_imageExportFormat);
         link.href = canvas.toDataURL(setting_imageExportFormat);
@@ -258,6 +270,9 @@ window.addEventListener("DOMContentLoaded", (e) => {
 
     let exportButton = document.getElementById("student-list-export");
     exportButton.addEventListener("click", exportData);
+
+    let imageExportButton = document.getElementById("image-export");
+    imageExportButton.addEventListener("click", exportImage);
 
 
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {

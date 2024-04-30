@@ -1,11 +1,20 @@
 :root {
-    --sidebar-width: clamp(150px, 20%, 500px);
+    --sidebar-max-width: 500px;
+    --sidebar-width: clamp(150px, 20%, var(--sidebar-max-width));
     --height-top-bar: 50px;
     --height-bottom-bar: 50px;
 }
 
 #print-title {
     display: none;
+}
+
+#print-title.html2canvas {
+    position: fixed;
+    top: .5in;
+    width: calc(100% - var(--page-offsetX) - var(--page-offsetX));
+    text-align: center;
+    display: block;
 }
 
 #sidebar {

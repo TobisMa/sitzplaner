@@ -9,5 +9,5 @@ function setPrintTitle(title) {
 
 window.addEventListener("DOMContentLoaded", e => {
     titleHTML = document.getElementById("print-title");
-    setPrintTitle(loadFromStorage(KEY_PRINT_TITLE, ""))
+    setPrintTitle(createHeaderName(" "))
 });

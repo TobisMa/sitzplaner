@@ -136,7 +136,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     document.querySelectorAll("#presets .preset").forEach(container => {
         if (container.dataset.presetname === "reset") {
             container.addEventListener("click", e => {
-                let answer = confirm("Alle Schüler aus den Tischen entfernen?");
+                let answer = confirm("Alle Schüler aus den Tischen entfernen?\nTischanordung bleibt erhalten.");
                 if (!answer) {
                     return;
                 }
