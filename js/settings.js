@@ -8,7 +8,6 @@ const DELETE_TABLE_ON_CLICK = 0;
 const KEEP_TABLE_ON_CLICK = 1;
 
 let settingModal;
-let setting_defaultExport = "splan";
 let setting_imageExportFormat = "image/png";
 let setting_algo_randomness = 2;
 let setting_delete_table_on_click = 1;
@@ -42,18 +41,10 @@ function tableSizing() {
 
 window.addEventListener("DOMContentLoaded", (e) => {
     settingModal = document.getElementById("settings-dialog");
-    setting_defaultExport = loadFromStorage(KEY_SETTING_DEFAULT_EXPORT, "splan");
     setting_imageExportFormat = loadFromStorage(KEY_SETTING_IMAGE_EXPORT_FORMAT, "image/png");
     setting_algo_randomness = loadFromStorage(KEY_SETTING_ALOG_RANDOMNESS, 2);
     setting_delete_table_on_click = loadFromStorage(KEY_DELETE_TABLE_ON_CLICK, 1);
     setting_scrollbar_behaviour = loadFromStorage(KEY_SCROLLBAR_BEHAVIOUR, 0);
-
-    let defaultExport = settingModal.querySelector("#setting-default-export");
-    defaultExport.value = setting_defaultExport;
-    defaultExport.addEventListener("change", (e) => {
-        setting_defaultExport = e.target.value;
-        saveToStorage(KEY_SETTING_DEFAULT_EXPORT, setting_defaultExport);
-    });
 
     let image_export_type = settingModal.querySelector("#setting-export-format");
     image_export_type.value = setting_imageExportFormat;
