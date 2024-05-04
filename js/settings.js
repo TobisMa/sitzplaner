@@ -30,12 +30,8 @@ function closeDialog(e) {
 function tableSizing() {
         console.debug("adjust tables");
         for (table of document.querySelectorAll("#room-table .table")) {
-            if (setting_scrollbar_behaviour === 0) {
-                table.style.height = (document.body.clientHeight - 260) / roomHeight + "px"; 
-            }
-            else {
-                table.style.removeProperty("height");
-            }
+            console.log("setProperty");
+            table.style.setProperty("--table-height", (document.body.clientHeight - 260) / roomHeight + "px");
         }
 }
 

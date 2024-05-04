@@ -14,57 +14,38 @@
     display: block;
 }
 
-#sidebar, #presets, #sliders {
-    display: none
+#sidebar {
+    display: none;
 }
 
-#content {
-    position: relative;
+#sliders {
+    display: none;
+}
+
+#presets {
+    display: none;
 }
 
 #tables {
+    left: 0;
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: center;
-    font-size: 12pt;
-    left: 0
 }
 
-#room-table {
-    width: 100%;
-    margin: 0;
+#room {
+    top: calc(var(--height-top-bar) + 10px);
+    position: absolute;
 }
 
-#room-table .table {
-    min-width: 3ch;
-    width: min-content;
+#room .table:not(.is-table) {
     outline: none;
 }
 
-#room-table .table:not(.is-table) .student-table {
-    min-height: 2em;
+#room #room-table .table:not(.is-table) {
+    height: unset;
+    max-height: var(--table-height);
 }
 
-#room-table .table:not(.is-table) {
-    min-width: 3ch;
-}
-
-#room-table .table.is-table .student-table {
-    background-color: transparent;
-}
-
-#room-table .table.is-table {
-    outline: 2px solid black;
-    border-collapse: collapse;
-}
-
-body {
-    margin: 0 var(--page-offsetX);
-}
-
-#pult {
-    border: 1px solid black;
+#room-table {
+    padding-left: var(--page-offsetX);
+    padding-right: var(--page-offsetX);
 }

@@ -126,8 +126,8 @@
 
 #room-table.no-scroll .table {
     min-width: unset;
-    min-height: unset !important;
     width: unset;
+    height: var(--table-height)
 }
 
 #room-table .table .student-table {
