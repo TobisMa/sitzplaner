@@ -6,8 +6,8 @@ function loadClassForEditing(name, loadPage) {
         return;
     }
 
-    let url = new URL("planer.html", window.location.origin);
-    url.search = "?className=" + window.encodeURIComponent(name);
+    let url = window.location.origin + window.location.pathname + "planer.html" + "?className=" + window.encodeURIComponent(name);
+    url.replace("//", "/")  // idc in this project
     console.debug(url);
     window.location.assign(url);
 }
